@@ -1,5 +1,7 @@
 package com.nfs.project.model;
 
+import java.io.Serializable;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -9,17 +11,20 @@ import jakarta.persistence.Table;
 
 @Table
 @Entity
-public class Product {
+public class Product implements Serializable{
     @Id
-    @SequenceGenerator(
-            name="productSquence",
-            sequenceName = "productSquence",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "productSquence"
-    )
+    // @SequenceGenerator(
+    //         name="productSquence",
+    //         sequenceName = "productSquence",
+    //         allocationSize = 1
+    // )
+    // @GeneratedValue(
+    //         strategy = GenerationType.SEQUENCE,
+    //         generator = "productSquence"
+    // )
+
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "productSquence")
+    @SequenceGenerator(name = "productSquence", sequenceName = "PRODUCTSQUENCE", allocationSize = 1)
     private int id;
     private long price;
     private String name,description,type,imagesrc;

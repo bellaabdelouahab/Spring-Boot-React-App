@@ -104,3 +104,19 @@ ALTER TABLE costumer RENAME TO customer;
 
 drop table produit;
 DROP TABLE orders;
+
+
+
+CREATE SEQUENCE productSquence START WITH 1 INCREMENT BY 1 CACHE 10;
+
+
+
+CREATE TABLE product (
+    id number,
+    price NUMBER,
+    name VARCHAR2(255),
+    description VARCHAR2(1000),
+    type VARCHAR2(255),
+    imagesrc VARCHAR2(1000)
+);
+
