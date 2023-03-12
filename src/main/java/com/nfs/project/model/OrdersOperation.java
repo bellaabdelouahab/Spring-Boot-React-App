@@ -1,5 +1,6 @@
 package com.nfs.project.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 import jakarta.persistence.Entity;
@@ -8,10 +9,12 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
+import lombok.Data;
 
+@Data
 @Entity(name = "orders_operation")
 @Table
-public class OrdersOperation {
+public class OrdersOperation implements Serializable {
     @Id
     @SequenceGenerator(
             name="OrdersOPSquence",
@@ -33,22 +36,6 @@ public class OrdersOperation {
     private Boolean confirmed,Shipped,Received;
     private int quantity;
     private OrdersOperation(){}
-
-    public OrdersOperation(int productId, int customerid, String label,
-                           float totalOrderPrice, float priceperunit, int quantity,boolean confirmed) {
-        this.ProductId = productId;
-        this.customerid = customerid;
-        this.Label = label;
-        this.TotalOrderPrice = totalOrderPrice;
-        this.priceperunit = priceperunit;
-        this.OrderDate = LocalDate.now();
-        this.quantity = quantity;
-        this.confirmed=confirmed;
-        this.Shipped=false;
-        this.Received=false;
-
-    }
-    
     public OrdersOperation(int productId, int customerid, String label,
             float totalOrderPrice, float priceperunit, int quantity, boolean confirmed, LocalDate orderDate) {
         this.ProductId = productId;
@@ -113,7 +100,7 @@ public class OrdersOperation {
     }
 
     public LocalDate getOrderDate() {
-        return OrderDate;
+        return this.OrderDate;
     }
 
     public void setOrderDate(LocalDate orderDate) {
