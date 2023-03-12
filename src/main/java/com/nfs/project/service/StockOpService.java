@@ -44,6 +44,7 @@ public class StockOpService implements StockOpServiceDAO {
 
     @Override
     public void SaveStockOp(StockOperation StockOp) {
+        
         if(productRepository.findById(StockOp.getProductId()).isPresent() &&
             StockOp.getLabel()!=""
         ){
@@ -52,7 +53,11 @@ public class StockOpService implements StockOpServiceDAO {
             Repository.save(StockOp);
         }
         else{
-            throw new IllegalStateException("Non Valid Format");
+            // throw new IllegalStateException("Non Valid Format");
+            StockOp.setProductId(1);
+            StockOp.setQuantityConsumed(0);
+            StockOp.setEnteredDate(LocalDate.now());
+            Repository.save(StockOp);
         }
     }
 
@@ -64,6 +69,12 @@ public class StockOpService implements StockOpServiceDAO {
         }
         else{
             throw new IllegalStateException("non-existed Key");
+        }
+    }
+
+    public void SaveStockOps(List<StockOperation> ops) {
+        for(StockOperation op:ops){
+            SaveStockOp(op);
         }
     }
 }

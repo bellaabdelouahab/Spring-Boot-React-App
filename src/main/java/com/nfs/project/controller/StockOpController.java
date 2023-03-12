@@ -48,5 +48,10 @@ public class StockOpController {
         Service.SaveStockOp(op);
         return op;
     }
+    @PostMapping(path = "/list")
+    public List<StockOperation> saveStockOperations(@RequestBody List<StockOperation> ops){
+        Service.SaveStockOps(ops);
+        return ops;
+    }
 
 }

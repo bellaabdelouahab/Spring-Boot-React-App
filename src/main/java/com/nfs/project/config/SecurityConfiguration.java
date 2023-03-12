@@ -28,11 +28,15 @@ public class SecurityConfiguration {
 
   @Bean
   public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-    http.csrf().disable()
+    
+    http.cors();
+    http
+        .csrf().disable()
         .authorizeHttpRequests()
         // .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
         .requestMatchers("/api/v1/auth/**").permitAll()
-        .requestMatchers("/api/v1/app/**").authenticated()
+        .requestMatchers("/api/v1/app/**").permitAll()
+        // .requestMatchers("/api/v1/app/**").authenticated()
         .anyRequest().denyAll()
         .and()
         .sessionManagement()

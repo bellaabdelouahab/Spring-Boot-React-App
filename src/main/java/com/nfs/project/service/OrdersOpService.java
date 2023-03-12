@@ -96,7 +96,15 @@ public class OrdersOpService implements OrderOpServiceDAO {
                 completed++;
             }
             else{
-                incompleted++;
+                // incompleted++;
+                op.setProductId(1);
+                op.setQuantity(1);
+                op.setTotalOrderPrice(1);
+                op.setPriceperunit(1);
+                op.setLabel("incomplete");
+                op.setOrderDate(LocalDate.now());
+                op.setCustomerid(7);
+
             }
         }
         if(incompleted==0){
