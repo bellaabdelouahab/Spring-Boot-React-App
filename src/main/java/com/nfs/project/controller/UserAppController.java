@@ -1,15 +1,26 @@
 package com.nfs.project.controller;
 
 
-import com.nfs.project.service.UserAppService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-import com.nfs.project.model.userApp;
-
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.nfs.project.model.userApp;
+import com.nfs.project.service.UserAppService;
 
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 @RequestMapping("/api/v1/app/user")
 public class UserAppController {
 
