@@ -108,6 +108,7 @@ DROP TABLE orders;
 
 
 CREATE SEQUENCE productSquence START WITH 1 INCREMENT BY 1 CACHE 10;
+CREATE SEQUENCE custumerSquence START WITH 1 INCREMENT BY 1 CACHE 10;
 
 
 
@@ -120,3 +121,14 @@ CREATE TABLE product (
     imagesrc VARCHAR2(1000)
 );
 
+create table customer(
+    id number,
+    firstName VARCHAR2(255),
+    lastName VARCHAR2(255),
+    address VARCHAR2(255),
+    city VARCHAR2(255),
+    postalcode VARCHAR2(255),
+    phone_number VARCHAR2(255)
+);
+
+drop table customer;

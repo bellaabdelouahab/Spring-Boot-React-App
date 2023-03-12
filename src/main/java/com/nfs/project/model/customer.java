@@ -1,5 +1,6 @@
 package com.nfs.project.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 import jakarta.persistence.Entity;
@@ -11,17 +12,20 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table
-public class customer {
+public class customer implements Serializable{
     @Id
-    @SequenceGenerator(
-            name="customerSquence",
-            sequenceName = "customerSquence",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "customerSquence"
-    )
+    // @SequenceGenerator(
+    //         name="customerSquence",
+    //         sequenceName = "customerSquence",
+    //         allocationSize = 1
+    // )
+    // @GeneratedValue(
+    //         strategy = GenerationType.SEQUENCE,
+    //         generator = "customerSquence"
+    // )
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "custumerSquence")
+    @SequenceGenerator(name = "custumerSquence", sequenceName = "CUSTUMERSQUENCE", allocationSize = 1)
+
     private int id;
     private String FirstName,LastName,Address,city,postalcode,phoneNumber;
     private LocalDate JoinDate;
