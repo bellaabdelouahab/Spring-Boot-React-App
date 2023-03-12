@@ -1,6 +1,7 @@
 package com.nfs.project.controller;
 
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,8 @@ public class OrderOpController {
 
     @PostMapping
     public OrdersOperation SaveOrder(@RequestBody OrdersOperation operation) {
+        // conver from dd/mm/yyyy to LocalDate
+        operation.setOrderDate(LocalDate.parse(operation.getOrderDate().toString()));
 
         Service.SaveOrderOperation(operation);
         return operation;

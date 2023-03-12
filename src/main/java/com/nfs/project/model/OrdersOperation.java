@@ -48,6 +48,21 @@ public class OrdersOperation {
         this.Received=false;
 
     }
+    
+    public OrdersOperation(int productId, int customerid, String label,
+            float totalOrderPrice, float priceperunit, int quantity, boolean confirmed, LocalDate orderDate) {
+        this.ProductId = productId;
+        this.customerid = customerid;
+        this.Label = label;
+        this.TotalOrderPrice = totalOrderPrice;
+        this.priceperunit = priceperunit;
+        this.OrderDate = orderDate;
+        this.quantity = quantity;
+        this.confirmed = confirmed;
+        this.Shipped = false;
+        this.Received = false;
+
+    }
 
     public int getId() {
         return id;
