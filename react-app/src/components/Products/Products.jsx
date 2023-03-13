@@ -86,25 +86,26 @@ export default function Products () {
                       <th>price</th>
                       <th>type</th>
                       <th>Description</th>
-                      
+                      <th>Action</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody className='scrool-tbody-proudcts'>
                     {products?.map((product) => (
                         <tr key={product.id}>
+                            <td>{product.id}</td>
                             <td>{product.name}</td>
-                            <td>{product.price}</td>
-                            <td>{product.type} DH</td>
+                            <td>{product.price} DH</td>
+                            <td>{product.type}</td>
                             <td>{product.description}</td>
                             <td >
                               <div className='prod-func'>
-                                  <span class="material-icons-sharp" style={{"color":"var(--color-primary)"}} onClick={()=>{
+                                  {/* <span class="material-icons-sharp" style={{"color":"var(--color-primary)"}} onClick={()=>{
                                       return navigate(`/products/modifier/${product.id}`, {state:{ product }} );
                                     }}>
                                     add
-                                  </span>
+                                  </span> */}
                                 
-                                <span class="material-icons-sharp" style={{"color":"var(--color-danger)"}}  onClick={()=>delete_this(product._id)}>
+                                <span class="material-icons-sharp" style={{"color":"var(--color-danger)"}}  onClick={()=>delete_this(product.id)}>
                                   delete
                                 </span>
                               </div>

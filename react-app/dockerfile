@@ -14,5 +14,5 @@ run npm i
 EXPOSE 3000
 CMD [ "npm", "start"]
 
-#docker command to access to image repo
+#docker command to access to image repo after build
 #docker exec -it container_id  sh

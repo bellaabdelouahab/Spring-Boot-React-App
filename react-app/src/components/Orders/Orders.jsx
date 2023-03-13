@@ -1,40 +1,20 @@
 import React,{useState,useEffect} from 'react'
 import profile_photo from '../../assets/images/profile-1.jpg';
 import axios from 'axios';
+import OrdersApi from '../../Api/OrdersApi';
 
 export default function Orders() {
     const [orders, setOrders] = useState([]);
-
     const [LoadData, setLoadData] = useState(true)
   useEffect(() => {
     getData()
   }, [LoadData]);
   const getData=async()=>{
-    await axios.get("http://localhost:8081/api/v1/app/orders",{headers: {
-    'Content-Type': 'application/json',
-    'mode': 'no-cors',
-  },withCredentials:true}).then(data=>{
-      setOrders(data.data)
-      console.log(JSON.stringify(data.data))
-    })
-    setLoadData(false)
+      await OrdersApi.getDataOrders.then((data)=>{
+          setOrders(data)
+      })
+      
   }
-
-
-  // useEffect(() => {
-  //   fetch("http://localhost:8081/api/v1/app/orders",{
-  //     method: 'GET',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       'mode': 'no-cors',
-  //     }
-  // })
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       setOrders(data);
-  //     });
-  // }, []);
-
     return (
         <>
         <main >
@@ -62,9 +42,13 @@ export default function Orders() {
                 <thead>
                     <tr>
                       <th>Nº</th>
-                      <th>Price</th>
+                      <th>Price per unit</th>
                       <th>Quantity</th>
                       <th>Total</th>
+                      <th>Client Nº</th>
+                      <th>Product Nº</th>
+                      <th>Order date</th>
+                      <th>Status</th>
                       {/* <th>Confirmed</th>
                       <th>Shipped</th>
                       <th>Received</th>
@@ -74,10 +58,14 @@ export default function Orders() {
                 <tbody>
                     {orders.map((order) => (
                         <tr key={order.id}>
-                            <td>Order {order.customerid}</td>
+                            <td>{order.id}</td>
                             <td>{order.priceperunit} DH</td>
                             <td>{order.quantity}</td>
-                            <td>{order.totalOrderPrice}</td>
+                            <td>{order.totalOrderPrice} DH</td>
+                            <td>{order.customerid}</td>
+                            <td>{order.productId}</td>
+                            <td>{order.orderDate}</td>
+                            <td>{OrdersApi.statusOrder(order)}</td>
                             {/* <td className={order.Status === "Pending"?"warning":"success"}>{order.Status}</td> */}
                         </tr>
                     ))}

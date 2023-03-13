@@ -1,15 +1,13 @@
 import React,{useState,useEffect} from 'react';
 import profile_photo from '../../assets/images/profile-1.jpg';
-
+import costumers from '../../Api/customersApi';
 export default function Customers () {
     const [customers, setCustomers] = useState([]);
 
     useEffect(() => {
-        fetch("http://localhost:8081/api/v1/app/customer")
-        .then((res) => res.json())
-        .then((data) => {
-            setCustomers(data);
-        });
+        costumers.getCustomers.then((data)=>{
+          setCustomers(data)
+        })
     }, []);
 
     return (
@@ -33,7 +31,7 @@ export default function Customers () {
       <br />
       </div>
           <h1>Customers :</h1><hr />
-    
+          
           <div className="products">
                 <table>
                     <thead>
@@ -49,11 +47,14 @@ export default function Customers () {
                     </thead>
                     <tbody>
                     {customers.map((customer) => (
-                        <tr key={customer._id}>
-                            <td>{customer.fullName}</td>
-                            <td>{customer.adresse}</td>
-                            <td>Order {customer.orders}</td>
-                            <td>{customer.dateOrder}</td>
+                        <tr key={customer.id}>
+                            <td>{customer.id}</td>
+                            <td>{customer.firstName}</td>
+                            <td>{customer.lastName}</td>
+                            <td>{customer.address}</td>
+                            <td>{customer.city}</td>
+                            <td>{customer.phoneNumber}</td>
+                            <td>{customer.joinDate}</td>
                         </tr>
                     ))}
                 </tbody>
