@@ -9,6 +9,7 @@ import Setting from './components/Settings/Setting';
 import AddProducts from './components/Products/AddProducts';
 import ModifierProducts from './components/Products/ModifierProducts';
 import StockOperations from './components/stock/stockoperation';
+import MainLogin from './components/Login/MainLogin';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Routes >
           <Route path='/' element={<Root />} >
             <Route path="/" element={<Dashboard />} />
+            
             <Route path="/customers" element={<Customers />} />
             <Route path="/orders" element={<Orders />} />
             <Route path="/products" element={<Products />} />
@@ -24,6 +26,7 @@ function App() {
             <Route path="/setting" element={<Setting />} />
             <Route path="/stock" element={<StockOperations />} />
           </Route>
+          <Route path="/login" element={<MainLogin />} />
           <Route path="*" element={<h1>This link not authorized </h1>} />
         </Routes>
     </BrowserRouter>

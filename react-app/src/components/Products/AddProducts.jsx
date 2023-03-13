@@ -14,7 +14,7 @@ export default function AddProducts () {
     const onSubmitForm = async (e) => {
         e.preventDefault();
 
-        fetch(`/add_prod`, {
+        fetch(`http://localhost:8081/api/v1/app/product`, {
             method: "POST",
             headers: { 
                 "Content-Type": "application/json" , 

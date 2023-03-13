@@ -5,7 +5,7 @@ export default function StockOperations() {
     const [orders, setOrders] = useState([]);
 
   useEffect(() => {
-    fetch("/order_data")
+    fetch("http://localhost:8081/api/v1/app/stockop")
       .then((res) => res.json())
       .then((data) => {
         setOrders(data);

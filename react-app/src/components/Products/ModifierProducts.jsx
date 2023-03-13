@@ -14,7 +14,7 @@ export default function ModifierProducts () {
     const onSubmitForm = async (e,id) => {
         e.preventDefault();
 
-        fetch(`/update_prod/${id}`, {
+        fetch(`http://localhost:8081/api/v1/app/product/${id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json" , 

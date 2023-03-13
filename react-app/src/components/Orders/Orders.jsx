@@ -1,16 +1,39 @@
 import React,{useState,useEffect} from 'react'
 import profile_photo from '../../assets/images/profile-1.jpg';
+import axios from 'axios';
 
 export default function Orders() {
     const [orders, setOrders] = useState([]);
 
+    const [LoadData, setLoadData] = useState(true)
   useEffect(() => {
-    fetch("/order_data")
-      .then((res) => res.json())
-      .then((data) => {
-        setOrders(data);
-      });
-  }, []);
+    getData()
+  }, [LoadData]);
+  const getData=async()=>{
+    await axios.get("http://localhost:8081/api/v1/app/orders",{headers: {
+    'Content-Type': 'application/json',
+    'mode': 'no-cors',
+  },withCredentials:true}).then(data=>{
+      setOrders(data.data)
+      console.log(JSON.stringify(data.data))
+    })
+    setLoadData(false)
+  }
+
+
+  // useEffect(() => {
+  //   fetch("http://localhost:8081/api/v1/app/orders",{
+  //     method: 'GET',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       'mode': 'no-cors',
+  //     }
+  // })
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setOrders(data);
+  //     });
+  // }, []);
 
     return (
         <>
@@ -42,20 +65,20 @@ export default function Orders() {
                       <th>Price</th>
                       <th>Quantity</th>
                       <th>Total</th>
-                      <th>Confirmed</th>
+                      {/* <th>Confirmed</th>
                       <th>Shipped</th>
                       <th>Received</th>
-                      <th>client</th>
+                      <th>client</th> */}
                     </tr>
                 </thead>
                 <tbody>
                     {orders.map((order) => (
-                        <tr key={order._id}>
-                            <td>Order {order.orderName}</td>
-                            <td>{order.price} DH</td>
+                        <tr key={order.id}>
+                            <td>Order {order.customerid}</td>
+                            <td>{order.priceperunit} DH</td>
                             <td>{order.quantity}</td>
-                            <td>{order.Total}</td>
-                            <td className={order.Status === "Pending"?"warning":"success"}>{order.Status}</td>
+                            <td>{order.totalOrderPrice}</td>
+                            {/* <td className={order.Status === "Pending"?"warning":"success"}>{order.Status}</td> */}
                         </tr>
                     ))}
                 </tbody>
