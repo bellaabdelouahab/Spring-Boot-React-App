@@ -30,14 +30,10 @@ export default function Products () {
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data.status === false) {
-          alert("error");
-        }
-        if (data.status === "ok") {
-          console.log(data.msg);
-          window.location.reload();
-        }
-      });
+        console.log(data)
+      }).catch((e)=>{
+        console.log(e)
+      })
   };
 
   return (

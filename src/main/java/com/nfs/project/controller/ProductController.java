@@ -68,7 +68,7 @@ public class ProductController {
         Service.updateProduct(id,name,price,desc);
     }
     @DeleteMapping(path = "{id}")
-    public void DeleteProduct(int id){
+    public void DeleteProduct(@PathVariable int id){
         Service.deleteProduct(id);
     }
 }
