@@ -1,6 +1,5 @@
 package com.nfs.project.config;
 
-import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -16,6 +15,7 @@ import org.springframework.security.web.authentication.logout.LogoutHandler;
 
 import com.nfs.project.filters.JwtAuthenticationFilter;
 
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 
 @Configuration
@@ -36,11 +36,11 @@ public class SecurityConfiguration {
       http
           .csrf().disable()
           .authorizeHttpRequests()
-          .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
+          .requestMatchers("/","/index.html", "/static/**","/**",
+              "/*.ico", "/*.json", "/*.png", "/api/user")
+          .permitAll()
           .requestMatchers("/api/v1/auth/**").permitAll()
-          .requestMatchers("/api/v1/app/**").permitAll()
-          // .requestMatchers("/api/v1/app/**").authenticated()
-          .anyRequest().denyAll()
+          .requestMatchers("/api/v1/app/**").authenticated()
           .and()
           .sessionManagement()
           .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
@@ -50,7 +50,12 @@ public class SecurityConfiguration {
           .logout()
           .logoutUrl("/api/v1/auth/logout")
           .addLogoutHandler(logoutHandler)
-          .logoutSuccessHandler((request, response, authentication) -> SecurityContextHolder.clearContext());
+          .logoutSuccessHandler((request, response, authentication) -> SecurityContextHolder.clearContext())
+          // sout the url of the request
+          .logoutSuccessUrl("/api/v1/auth/logout")
+          .and()
+          .exceptionHandling()
+          .authenticationEntryPoint((request, response, authException) -> response.sendError(HttpServletResponse.SC_NOT_FOUND));
       return http.build();
   }
 
