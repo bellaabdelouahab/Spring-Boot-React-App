@@ -33,30 +33,6 @@ public class ExceptionFilterHandler {
                     ));
             response.getWriter().write(jsonString);
        }
-       else if (ex instanceof ExpiredJwtException){
-            response.setStatus(HttpStatus.UNAUTHORIZED.value());
-            response.getWriter().write(new ObjectMapper().writeValueAsString(
-                new ResponseDetails(
-                            fmt.format(ZonedDateTime.now()),
-                            HttpStatus.UNAUTHORIZED.value(),
-                            HttpStatus.UNAUTHORIZED.getReasonPhrase(),
-                            ex.getMessage(),
-                            "/api/v1/auth/login"
-                ))
-            );
-        }
-        else if (ex instanceof UnsupportedJwtException){
-            response.setStatus(HttpStatus.UNAUTHORIZED.value());
-            response.getWriter().write(new ObjectMapper().writeValueAsString(
-                    new ResponseDetails(
-                            fmt.format(ZonedDateTime.now()),
-                            HttpStatus.UNAUTHORIZED.value(),
-                            HttpStatus.UNAUTHORIZED.getReasonPhrase(),
-                            ex.getMessage(),
-                            "/api/v1/auth/login"
-                    )
-            ));
-        }
     }
 
     @Data
