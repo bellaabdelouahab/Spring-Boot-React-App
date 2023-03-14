@@ -32,3 +32,4 @@ build/
 *.class
 
 react-app/node_modules
+target/

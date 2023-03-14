@@ -11,7 +11,6 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.nfs.project.repository.TokenRepository;
 import com.nfs.project.service.JwtService;
 
 import jakarta.servlet.FilterChain;
@@ -26,7 +25,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
   private final JwtService jwtService;
   private final UserDetailsService userDetailsService;
-  private final TokenRepository tokenRepository;
+  // private final TokenRepository tokenRepository;
 
   @Override
   protected void doFilterInternal(
@@ -45,9 +44,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     userEmail = jwtService.extractUsername(jwt);
     if (userEmail != null && SecurityContextHolder.getContext().getAuthentication() == null) {
       UserDetails userDetails = this.userDetailsService.loadUserByUsername(userEmail);
-      var isTokenValid = tokenRepository.findByToken(jwt)
-          .map(t -> !t.isExpired() && !t.isRevoked())
-          .orElse(false);
+      // var isTokenValid = tokenRepository.findByToken(jwt)
+      //     .map(t -> !t.isExpired() && !t.isRevoked())
+      //     .orElse(false);
       // if (jwtService.isTokenValid(jwt, userDetails) && isTokenValid) {
       if (jwtService.isTokenValid(jwt, userDetails)) {
         UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
