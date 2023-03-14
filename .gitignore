@@ -28,3 +28,7 @@ build/
 
 ### VS Code ###
 .vscode/
+
+*.class
+
+react-app/node_modules
