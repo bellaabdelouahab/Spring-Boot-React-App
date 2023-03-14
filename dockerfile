@@ -1,0 +1,18 @@
+# ==== CONFIGURE =====
+
+FROM node:18-alpine 
+
+WORKDIR /app
+
+COPY . .
+
+# RUN npm ci 
+# RUN npm run build
+
+# ENV NODE_ENV production
+run npm i
+EXPOSE 3000
+CMD [ "npm", "start"]
+
+#docker command to access to image repo after build
+#docker exec -it container_id  sh

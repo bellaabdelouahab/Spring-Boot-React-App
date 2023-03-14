@@ -12,11 +12,8 @@ public class ReactController {
         System.out.println("hhhhhhhh");
         return "forward:/index.html";
     }
-
-    // add other possible routes here
     @GetMapping(value = "/{path:[^\\.]*}")
     public String redirect() {
-        System.out.println("hhhhhhhh");
         return "forward:/index.html";
     }
 }

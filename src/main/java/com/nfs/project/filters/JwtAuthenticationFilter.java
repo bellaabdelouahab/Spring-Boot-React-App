@@ -41,7 +41,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
       return;
     }
     jwt = authHeader.substring(7);
-    userEmail = jwtService.extractUsername(jwt);
+    try{
+      userEmail = jwtService.extractUsername(jwt);
     if (userEmail != null && SecurityContextHolder.getContext().getAuthentication() == null) {
       UserDetails userDetails = this.userDetailsService.loadUserByUsername(userEmail);
       // var isTokenValid = tokenRepository.findByToken(jwt)
@@ -50,17 +51,21 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
       // if (jwtService.isTokenValid(jwt, userDetails) && isTokenValid) {
       if (jwtService.isTokenValid(jwt, userDetails)) {
         UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
-            userDetails,
+          userDetails,
             null,
             userDetails.getAuthorities()
-        );
-        authToken.setDetails(
+            );
+            authToken.setDetails(
             new WebAuthenticationDetailsSource().buildDetails(request)
         );
         SecurityContextHolder.getContext().setAuthentication(authToken);
       }
     }
     System.out.println("uri ==>"+ request.getRequestURI());
+  }
+    catch(io.jsonwebtoken.ExpiredJwtException e){
+      System.out.println("token error :"+e.getMessage());
+    }
     filterChain.doFilter(request, response);
   }
 }
