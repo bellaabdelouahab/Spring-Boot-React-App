@@ -5,16 +5,17 @@ import OrdersApi from '../../Api/OrdersApi';
 
 export default function Orders() {
     const [orders, setOrders] = useState([]);
-    const [LoadData, setLoadData] = useState(true)
-  useEffect(() => {
-    getData()
-  }, [LoadData]);
-  const getData=async()=>{
-      await OrdersApi.getDataOrders.then((data)=>{
-          setOrders(data)
+    // const [LoadData, setLoadData] = useState(true);
+
+    
+    useEffect(() => {
+        getData()
+      }, [true]);
+      const getData=async()=>{
+          await OrdersApi.getDataOrders.then((data)=>{
+              setOrders(data)
       })
-      
-  }
+    }
     return (
         <>
         <main >
@@ -50,10 +51,6 @@ export default function Orders() {
                       <th>Order date</th>
                       <th>Status</th>
                       <th>Action</th>
-                      {/* <th>Confirmed</th>
-                      <th>Shipped</th>
-                      <th>Received</th>
-                      <th>client</th> */}
                     </tr>
                 </thead>
                 <tbody>
@@ -66,21 +63,14 @@ export default function Orders() {
                             <td>{order.customerid}</td>
                             <td>{order.productId}</td>
                             <td>{order.orderDate}</td>
-                            <td>{OrdersApi.statusOrder(order)}</td>
-                            {/* <td className={order.Status === "Pending"?"warning":"success"}>{order.Status}</td> */}
+                            <td className={OrdersApi.statusOrder(order) === "confirmed"?"success" : "warning"}>{OrdersApi.statusOrder(order)}</td>
                             <td >
-                              <div className='prod-func'>
-                                  {/* <span class="material-icons-sharp" style={{"color":"var(--color-primary)"}} onClick={()=>{
-                                      return navigate(`/products/modifier/${product.id}`, {state:{ product }} );
-                                    }}>
-                                    add
-                                  </span> */}
-                                
+                              <div className='prod-func'>                                
                                 <span class="material-icons-sharp" style={{"color":"var(--color-danger)"}}>
                                   edit
                                 </span>
-                                <span class="material-icons-sharp" style={{"color":"var(--color-danger)"}}>
-                                  paper
+                                <span class="material-icons-sharp" style={{"color":"var(--color-black)"}}>
+                                  article
                                 </span>
                               </div>
                             </td>
