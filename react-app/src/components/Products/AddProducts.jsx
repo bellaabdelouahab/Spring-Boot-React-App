@@ -2,6 +2,7 @@ import React,{useState} from 'react'
 import profile_photo from '../../assets/images/profile-1.jpg';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
+import productsApi from '../../Api/ProductApi';
 export default function AddProducts () {
 
     const navigate = useNavigate();
@@ -13,43 +14,20 @@ export default function AddProducts () {
 // console.log(process.env.PORT_URL);
 
     const onSubmitForm = async () => {
-        console.log("first")
-        await axios.post('http://localhost:8081/api/v1/app/product',{"price": 3,
-        "name":productName,
-        "description":desc,
-        "type":desc,
-        "imagesrc":ImageSrc}).then((res)=>{
-            console.log(res.data)
+        // console.log("first")
+        // await axios.post('http://localhost:8081/api/v1/app/product',{"price": 3,
+        // "name":productName,
+        // "description":desc,
+        // "type":desc,
+        // "imagesrc":ImageSrc}).then((res)=>{
+        //     console.log(res.data)
+        // })
+        productsApi.addProduct(productName,desc,Type,ImageSrc).then((data)=>{
+            console.log(data)
+        }).catch((e)=>{
+          console.log(e)
         })
-        
-        // await fetch(`http://localhost:8081/api/v1/app/product`, {
-        //     method: "POST",
-        //     headers: { 
-        //         "Content-Type": "application/json" , 
-        //         "Access-Control-Allow-Origin": "/*",
-        //         "Access-Control-Allow-Credentials": "true", 
-        //         "Access-Control-Allow-Methods": "GET,HEAD,OPTIONS,POST,PUT"
-        //     },
-        //     body: {
-        //       "price":price,
-        //       "name": productName,
-        //       "description":desc,
-        //       "type":Type,
-        //       "imagesrc":ImageSrc
-        //     },
-        //     })
-        //     .then((res) => res.json())
-        //     .then((data) => {
-        //       console.log(data)
-        //     // if (data.status === false) {
-        //     //     console.log(data.msg);
-        //     // }
-        //     // if (data.status === "ok") {
-        //     //     console.log(data.msg);
-        //     //     navigate("/products");
-        //     // }
-        // });
-        console.log(productName)
+        // console.log(productName)
     }
 
     return (

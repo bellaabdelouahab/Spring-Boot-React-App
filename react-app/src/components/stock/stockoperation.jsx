@@ -39,7 +39,20 @@ export default function StockOperations() {
       <br />
       </div>
           <h1>Stock Data:</h1><hr />
-    
+          <div className='right'>
+            <div className='top'>
+              <div className="add-product">
+                <button id='btn-add' onClick={() => {
+                        window.open("/products/add", "_blank");
+                    }}>
+                    <span className="material-icons-sharp">
+                        add
+                    </span>
+                    Add Stock
+                </button>
+            </div>
+            </div>
+            </div>  
           <div className="products">
           <table>
                 <thead>

@@ -10,7 +10,7 @@ import AddProducts from './components/Products/AddProducts';
 import ModifierProducts from './components/Products/ModifierProducts';
 import StockOperations from './components/stock/stockoperation';
 import MainLogin from './components/Login/MainLogin';
-
+import AddStock from './components/stock/addStock';
 function App() {
   return (
     <BrowserRouter>
@@ -25,6 +25,7 @@ function App() {
           <Route path="/products/modifier/:id" element={<ModifierProducts />} />
           <Route path="/setting" element={<Setting />} />
           <Route path="/stock" element={<StockOperations />} />
+          <Route path="/stock/add" element={<AddStock />} />
         </Route>
         <Route path="/login" element={<MainLogin />} />
         <Route path="*" element={<MainLogin />} />

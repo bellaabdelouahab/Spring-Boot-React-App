@@ -1,4 +1,5 @@
-import config from "./ConfigApi"
+import config from "./ConfigApi";
+import axios from "axios";
 
 const getStockData=new Promise((resolve,reject)=>{
     fetch(`${config.getApiPath()}/api/v1/app/stockop`)
@@ -10,8 +11,18 @@ const getStockData=new Promise((resolve,reject)=>{
       })
 })
 
-
+const addStockOp=(productId,quantity,label)=>{
+    return new Promise((resolve,reject)=>{
+      axios.post(`${config.getApiPath()}/api/v1/app/stockop`,{
+        "productId":productId,"quantity":quantity,"label":label
+      }).then((data)=>{
+          resolve(data.data);
+      }).catch((e)=>{
+          reject(e)
+      })
+    })
+}
 const StockOp={
-    getStockData
+    getStockData,addStockOp
 }
 export default StockOp;

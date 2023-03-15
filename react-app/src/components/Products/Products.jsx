@@ -2,7 +2,7 @@ import React,{useState,useEffect} from 'react'
 import "./Products.css";
 import profile_photo from '../../assets/images/profile-1.jpg';
 import { useNavigate } from "react-router-dom";
-import axios from 'axios';
+import productsApi from '../../Api/ProductApi';
 
 export default function Products () {
   const navigate = useNavigate();
@@ -12,28 +12,16 @@ export default function Products () {
     getData()
   }, [LoadData]);
   const getData=async()=>{
-    await axios.get("http://localhost:8081/api/v1/app/product",{headers: {
-    'Content-Type': 'application/json',
-    'mode': 'no-cors',
-    
-
-  },withCredentials:true}).then(data=>{
-      setProducts(data.data)
-      console.log(JSON.stringify(data.data))
+    productsApi.getProducts.then((data)=>{
+      setProducts(data)
     })
     setLoadData(false)
   }
 
   const delete_this = (id) => {
-    fetch(`http://localhost:8081/api/v1/app/product/${id}`, {
-      method: "DELETE",
+    productsApi.deleteProductById(id).then((res)=>{
+        console.log(res)
     })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data)
-      }).catch((e)=>{
-        console.log(e)
-      })
   };
 
   return (
