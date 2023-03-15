@@ -49,6 +49,7 @@ export default function Orders() {
                       <th>Product Nº</th>
                       <th>Order date</th>
                       <th>Status</th>
+                      <th>Action</th>
                       {/* <th>Confirmed</th>
                       <th>Shipped</th>
                       <th>Received</th>
@@ -67,6 +68,22 @@ export default function Orders() {
                             <td>{order.orderDate}</td>
                             <td>{OrdersApi.statusOrder(order)}</td>
                             {/* <td className={order.Status === "Pending"?"warning":"success"}>{order.Status}</td> */}
+                            <td >
+                              <div className='prod-func'>
+                                  {/* <span class="material-icons-sharp" style={{"color":"var(--color-primary)"}} onClick={()=>{
+                                      return navigate(`/products/modifier/${product.id}`, {state:{ product }} );
+                                    }}>
+                                    add
+                                  </span> */}
+                                
+                                <span class="material-icons-sharp" style={{"color":"var(--color-danger)"}}>
+                                  edit
+                                </span>
+                                <span class="material-icons-sharp" style={{"color":"var(--color-danger)"}}>
+                                  paper
+                                </span>
+                              </div>
+                            </td>
                         </tr>
                     ))}
                 </tbody>
