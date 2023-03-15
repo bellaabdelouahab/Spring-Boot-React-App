@@ -14,25 +14,24 @@ import MainLogin from './components/Login/MainLogin';
 function App() {
   return (
     <BrowserRouter>
-        <Routes >
-          <Route path='/' element={<Root />} >
-            <Route path="/" element={<Dashboard />} />
-            
-            <Route path="/customers" element={<Customers />} />
-            <Route path="/orders" element={<Orders />} />
-            <Route path="/products" element={<Products />} />
-            <Route path="/products/add" element={<AddProducts />} />
-            <Route path="/products/modifier/:id" element={<ModifierProducts />} />
-            <Route path="/setting" element={<Setting />} />
-            <Route path="/stock" element={<StockOperations />} />
-          </Route>
-          <Route path="/login" element={<MainLogin />} />
-          <Route path="*" element={<h1>This link not authorized </h1>} />
-        </Routes>
+      <Routes>
+        <Route path="/" element={<Root />}>
+          <Route path="/" element={<Dashboard />} />
+
+          <Route path="/customers" element={<Customers />} />
+          <Route path="/orders" element={<Orders />} />
+          <Route path="/products" element={<Products />} />
+          <Route path="/products/add" element={<AddProducts />} />
+          <Route path="/products/modifier/:id" element={<ModifierProducts />} />
+          <Route path="/setting" element={<Setting />} />
+          <Route path="/stock" element={<StockOperations />} />
+        </Route>
+        <Route path="/login" element={<MainLogin />} />
+        <Route path="*" element={<MainLogin />} />
+      </Routes>
     </BrowserRouter>
-
-
   );
 }
 
 export default App;
+

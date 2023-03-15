@@ -22,7 +22,7 @@
     background: var(--color-light);
     color: var(--color-primary);
     border-radius: 0.8rem;
-    width: 13vw;
+    width: 20vw;
     justify-content: space-evenly;
 }
 
@@ -36,7 +36,7 @@
     border-radius: 10px;
     color:var(--color-primary);
     background: var(--color-light);
-    height: 2rem;
-    width: 13vw;
-    padding: 6px;
+    height: 2.4rem;
+    width: 20vw;
+    padding: 10px;
 }

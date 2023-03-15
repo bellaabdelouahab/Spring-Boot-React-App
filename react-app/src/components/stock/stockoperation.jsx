@@ -1,16 +1,22 @@
 import React,{useState,useEffect} from 'react'
 import profile_photo from '../../assets/images/profile-1.jpg';
-
+import StockOp from '../../Api/StockOpApi';
 export default function StockOperations() {
-    const [orders, setOrders] = useState([]);
-
+  const [orders, setOrders] = useState([]);
+  const [LoadData, setLoadData] = useState(true)
   useEffect(() => {
-    fetch("http://localhost:8081/api/v1/app/stockop")
-      .then((res) => res.json())
-      .then((data) => {
+      StockOp.getStockData.then((data)=>{
         setOrders(data);
-      });
-  }, []);
+      })
+  }, [LoadData]);
+  
+  
+  const exitedDate=(order)=>{
+    if(order.exitedDate==null){
+      return "-";
+    }
+    return order.exitedDate;
+  }
 
     return (
         <>
@@ -50,12 +56,14 @@ export default function StockOperations() {
                 </thead>
                 <tbody>
                     {orders.map((order) => (
-                        <tr key={order._id}>
-                            <td>Order {order.orderName}</td>
-                            <td>{order.price} DH</td>
+                        <tr key={order.id}>
+                            <td>{order.id}</td>
+                            <td>{order.enteredDate}</td>
+                            <td>{exitedDate(order)}</td>
+                            <td>{order.label}</td>
+                            <td>{order.productId}</td>
                             <td>{order.quantity}</td>
-                            <td>{order.Total}</td>
-                            <td className={order.Status === "Pending"?"warning":"success"}>{order.Status}</td>
+                            <td>{order.quantityConsumed}</td>
                         </tr>
                     ))}
                 </tbody>

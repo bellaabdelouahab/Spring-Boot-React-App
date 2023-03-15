@@ -1,9 +1,18 @@
 import React from 'react'
 import './dash.css'
 import profile_photo from '../../assets/images/profile-1.jpg';
-
+import { useState,useEffect } from 'react';
+import OrdersApi from '../../Api/OrdersApi';
+import { Link } from 'react-router-dom';
 export default function Dashboard (){
-  
+  const [ordersData, setOrders] = useState([])
+  const [LoadData, setLoadData] = useState(true)
+  useEffect(()=>{
+      OrdersApi.getDataOrders.then((data)=>{
+        setOrders(data)
+      })
+  },[LoadData])
+
   return (
     <>
     <main>
@@ -73,15 +82,34 @@ export default function Dashboard (){
             <h2>Recent Orders</h2>
             <table>
                 <thead>
-                    <tr>
-                        <th>Product Name</th>
-                        <th>Product Number</th>
-                        <th>Payement</th>
-                        <th>Status</th>
+                <tr>
+                      <th>Nº</th>
+                      <th>Price per unit</th>
+                      <th>Quantity</th>
+                      <th>Total</th>
+                      <th>Client Nº</th>
+                      <th>Product Nº</th>
+                      <th>Order date</th>
+                      <th>Status</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                  {
+                    ordersData.reverse().slice(0,2).map((order) => (
+                      <tr key={order.id}>
+                          <td>{order.id}</td>
+                          <td>{order.priceperunit} DH</td>
+                          <td>{order.quantity}</td>
+                          <td>{order.totalOrderPrice} DH</td>
+                          <td>{order.customerid}</td>
+                          <td>{order.productId}</td>
+                          <td>{order.orderDate}</td>
+                          <td>{OrdersApi.statusOrder(order)}</td>
+                          {/* <td className={order.Status === "Pending"?"warning":"success"}>{order.Status}</td> */}
+                      </tr>
+                    ))
+                  }
+                    {/* <tr>
                         <td>Foldable mini drone</td>
                         <td>123456789</td>
                         <td>Paypal</td>
@@ -92,10 +120,10 @@ export default function Dashboard (){
                         <td>123456789</td>
                         <td>Paypal</td>
                         <td className='warning'>Pending</td>
-                    </tr>
+                    </tr> */}
                 </tbody>
             </table><br />
-            <a href={"/products"}>View All</a>
+            <Link to={"/orders"}>View All</Link>
         </div>
     </main>
     <div className='right'>

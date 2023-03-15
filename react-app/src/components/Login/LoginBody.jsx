@@ -38,10 +38,18 @@ export default function LoginBody() {
         if (validateForm()) {
           const { username, password } = values;
           console.log(values);
-          const { data } = await axios.post("z", {
-            username,
-            password,
+          const { data } = await axios.post(
+            "http://localhost:8081/api/v1/auth/authenticate",
+            {
+              email: username,
+              password,
+            }
+          ).then((response) => {
+            console.log(response);
+          }).catch((error) => {
+            console.log(error);
           });
+
     
             navigate("/");
           }
@@ -64,4 +72,5 @@ export default function LoginBody() {
             
         </div>
     )
+
 }

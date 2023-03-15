@@ -35,6 +35,7 @@ public class AuthenticationService {
         .role(Role.USER)
         .build();
     var savedUser = repository.save(user);
+    System.out.println("saved user ==>"+ savedUser);
     var jwtToken = jwtService.generateToken(user);
     // saveUserToken(savedUser, jwtToken);
     return AuthenticationResponse.builder()
@@ -59,7 +60,7 @@ public class AuthenticationService {
         .build();
   }
 
-  private void saveUserToken(User user, String jwtToken) {
+  public void saveUserToken(User user, String jwtToken) {
     var token = Token.builder()
         .user(user)
         .token(jwtToken)
