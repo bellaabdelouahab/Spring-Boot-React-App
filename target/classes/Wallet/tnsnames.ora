@@ -1,8 +1,0 @@
-nfs315_high = (description= (retry_count=20)(retry_delay=3)(address=(protocol=tcps)(port=1522)(host=adb.me-jeddah-1.oraclecloud.com))(connect_data=(service_name=g07ffc3ff8150c0_nfs315_high.adb.oraclecloud.com))(security=(ssl_server_cert_dn="CN=adb.me-jeddah-1.oraclecloud.com, OU=Oracle ADB JEDDAH, O=Oracle Corporation, L=Redwood City, ST=California, C=US")))
-
-nfs315_low = (description= (retry_count=20)(retry_delay=3)(address=(protocol=tcps)(port=1522)(host=adb.me-jeddah-1.oraclecloud.com))(connect_data=(service_name=g07ffc3ff8150c0_nfs315_low.adb.oraclecloud.com))(security=(ssl_server_cert_dn="CN=adb.me-jeddah-1.oraclecloud.com, OU=Oracle ADB JEDDAH, O=Oracle Corporation, L=Redwood City, ST=California, C=US")))
-
-nfs315_medium = (description= (retry_count=20)(retry_delay=3)(address=(protocol=tcps)(port=1522)(host=adb.me-jeddah-1.oraclecloud.com))(connect_data=(service_name=g07ffc3ff8150c0_nfs315_medium.adb.oraclecloud.com))(security=(ssl_server_cert_dn="CN=adb.me-jeddah-1.oraclecloud.com, OU=Oracle ADB JEDDAH, O=Oracle Corporation, L=Redwood City, ST=California, C=US")))
-
-
-
