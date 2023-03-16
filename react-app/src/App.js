@@ -11,23 +11,25 @@ import ModifierProducts from './components/Products/ModifierProducts';
 import StockOperations from './components/stock/stockoperation';
 import MainLogin from './components/Login/MainLogin';
 import AddStock from './components/stock/addStock';
+import HomePage from './components/Home/home';
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Root />}>
-          <Route path="/" element={<Dashboard />} />
+          <Route path='/' element={<HomePage />} />
+          <Route path="/app" element={<Root />}>
+          <Route path="/app/Dashboard" element={<Dashboard />} />
 
-          <Route path="/customers" element={<Customers />} />
-          <Route path="/orders" element={<Orders />} />
-          <Route path="/products" element={<Products />} />
-          <Route path="/products/add" element={<AddProducts />} />
-          <Route path="/products/modifier/:id" element={<ModifierProducts />} />
-          <Route path="/setting" element={<Setting />} />
-          <Route path="/stock" element={<StockOperations />} />
-          <Route path="/stock/add" element={<AddStock />} />
+          <Route path="/app/customers" element={<Customers />} />
+          <Route path="/app/orders" element={<Orders />} />
+          <Route path="/app/products" element={<Products />} />
+          <Route path="/app/products/add" element={<AddProducts />} />
+          <Route path="/app/products/modifier/:id" element={<ModifierProducts />} />
+          <Route path="/app/setting" element={<Setting />} />
+          <Route path="/app/stock" element={<StockOperations />} />
+          <Route path="/app/stock/add" element={<AddStock />} />
         </Route>
-        <Route path="/login" element={<MainLogin />} />
+        <Route path="/app/login" element={<MainLogin />} />
         <Route path="*" element={<MainLogin />} />
       </Routes>
     </BrowserRouter>

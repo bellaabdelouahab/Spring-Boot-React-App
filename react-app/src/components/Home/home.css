@@ -1,0 +1,21 @@
+
+
+.main-home-page{
+    padding:0px;
+    margin: 0px;
+}
+.header{
+    text-align: center;
+    padding: 3rem;
+}
+.contactinfos a{
+    padding: 1rem;
+    display: flex;
+}
+.contactinfos{
+    display: flex;
+    justify-content: center;
+}
+.contactinfos a span{
+    color: #f6f6f9;
+}
