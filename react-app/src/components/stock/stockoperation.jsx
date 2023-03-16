@@ -1,14 +1,27 @@
 import React,{useState,useEffect} from 'react'
 import profile_photo from '../../assets/images/profile-1.jpg';
 import StockOp from '../../Api/StockOpApi';
+import {CSVLink} from 'react-csv';
+
 export default function StockOperations() {
-  const [orders, setOrders] = useState([]);
-  const [LoadData, setLoadData] = useState(true)
+  const [stocks, setStocks] = useState([]);
+  const block_effetc = true;
+
+  const headers = [
+      { label: "Nº", key: "id" },
+      { label: "Entred date", key: "enteredDate" },
+      { label: "Exited date", key: "exitedDate" },
+      { label: "Label", key: "label" },
+      { label: "Nº Product", key: "productId" },
+      { label: "Quantity", key: "quantity" },
+      { label: "Quantity Consumed", key: "quantityConsumed" }
+    ];
+
   useEffect(() => {
       StockOp.getStockData.then((data)=>{
-        setOrders(data);
+        setStocks(data);
       })
-  }, [LoadData]);
+  }, [block_effetc]);
   
   
   const exitedDate=(order)=>{
@@ -17,6 +30,12 @@ export default function StockOperations() {
     }
     return order.exitedDate;
   }
+
+  const csvReport = {
+      data: stocks,
+      headers: headers,
+      filename: 'Stockes.csv'
+    };
 
     return (
         <>
@@ -41,7 +60,7 @@ export default function StockOperations() {
           <h1>Stock Data:</h1><hr />
           <div className='right'>
             <div className='top'>
-              <div className="add-product">
+              <div className="add-product" style={{"justify-content":"space-evenly","display":"flex","width":350}}>
                 <button id='btn-add' onClick={() => {
                         window.open("/stock/add", "_blank");
                     }}>
@@ -50,6 +69,8 @@ export default function StockOperations() {
                     </span>
                     Add Stock
                 </button>
+
+                <CSVLink {...csvReport} id='csv-add'>Export to CSV</CSVLink>
             </div>
             </div>
             </div>  
@@ -68,15 +89,15 @@ export default function StockOperations() {
                     </tr>
                 </thead>
                 <tbody>
-                    {orders.map((order) => (
-                        <tr key={order.id}>
-                            <td>{order.id}</td>
-                            <td>{order.enteredDate}</td>
-                            <td>{exitedDate(order)}</td>
-                            <td>{order.label}</td>
-                            <td>{order.productId}</td>
-                            <td>{order.quantity}</td>
-                            <td>{order.quantityConsumed}</td>
+                    {stocks.map((stock) => (
+                        <tr key={stock.id}>
+                            <td>{stock.id}</td>
+                            <td>{stock.enteredDate}</td>
+                            <td>{exitedDate(stock)}</td>
+                            <td>{stock.label}</td>
+                            <td>{stock.productId}</td>
+                            <td>{stock.quantity}</td>
+                            <td>{stock.quantityConsumed}</td>
                         </tr>
                     ))}
                 </tbody>

@@ -1,14 +1,33 @@
 import React,{useState,useEffect} from 'react';
 import profile_photo from '../../assets/images/profile-1.jpg';
 import costumers from '../../Api/customersApi';
+import {CSVLink} from 'react-csv';
+
 export default function Customers () {
-    const [customers, setCustomers] = useState([]);
+    const [customers_, setCustomers] = useState([]);
+    const block_effetc = true;
+
+    const headers = [
+      { label: "Nº", key: "id" },
+      { label: "First Name", key: "firstName" },
+      { label: "Last Name", key: "lastName" },
+      { label: "Address", key: "address" },
+      { label: "City", key: "city" },
+      { label: "Phone Number", key: "phoneNumber" },
+      { label: "Join Date", key: "joinDate" }
+    ];
 
     useEffect(() => {
         costumers.getCustomers.then((data)=>{
           setCustomers(data)
         })
-    }, []);
+    }, [block_effetc]);
+
+    const csvReport = {
+      data: customers_,
+      headers: headers,
+      filename: 'costumers.csv'
+    };
 
     return (
         <>
@@ -31,6 +50,13 @@ export default function Customers () {
       <br />
       </div>
           <h1>Customers :</h1><hr />
+          <div className='right'>
+            <div className='top success'>
+              <div className="add-product">
+                <CSVLink {...csvReport} id='csv-add'>Export to CSV</CSVLink>
+            </div>
+            </div>
+          </div>  
           
           <div className="products">
                 <table>
@@ -46,7 +72,7 @@ export default function Customers () {
                         </tr>
                     </thead>
                     <tbody>
-                    {customers.map((customer) => (
+                    {customers_.map((customer) => (
                         <tr key={customer.id}>
                             <td>{customer.id}</td>
                             <td>{customer.firstName}</td>

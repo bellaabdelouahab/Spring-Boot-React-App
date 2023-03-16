@@ -1,10 +1,10 @@
 import React,{useState} from 'react'
 import profile_photo from '../../assets/images/profile-1.jpg';
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import StockOp from '../../Api/StockOpApi';
 export default function AddStock () {
 
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     // Form 
     const [ProductNumber, setProductNumber] = useState();

@@ -1,11 +1,12 @@
 import React,{useState,useEffect} from 'react'
 import "./Products.css";
 import profile_photo from '../../assets/images/profile-1.jpg';
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import productsApi from '../../Api/ProductApi';
+import {CSVLink} from 'react-csv';
 
 export default function Products () {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [products, setProducts] = useState([]);
   const [LoadData, setLoadData] = useState(true)
   useEffect(() => {
@@ -22,6 +23,19 @@ export default function Products () {
     productsApi.deleteProductById(id).then((res)=>{
         console.log(res)
     })
+  };
+  const headers = [
+    { label: "Nº", key: "id" },
+    { label: "Name", key: "name" },
+    { label: "Price", key: "price" },
+    { label: "Type", key: "type" },
+    { label: "Description", key: "description" }
+  ];
+
+  const csvReport = {
+    data: products,
+    headers: headers,
+    filename: 'products.csv'
   };
 
   return (
@@ -48,7 +62,7 @@ export default function Products () {
       <h1>Products :</h1><hr />
       <div className='right'>
     <div className='top'>
-      <div className="add-product">
+      <div className="add-product" style={{"justify-content":"space-evenly","display":"flex","width":350}}>
         <button id='btn-add' onClick={() => {
                 window.open("/products/add", "_blank");
             }}>
@@ -57,6 +71,8 @@ export default function Products () {
             </span>
             Add Product
         </button>
+
+        <CSVLink {...csvReport} id='csv-add'>Export to CSV</CSVLink>
     </div>
     </div>
     </div>  

@@ -4,7 +4,6 @@ import closeLogo from '../../assets/images/close.svg'
 import logo from '../../assets/images/logo.png'
 import { NavLink } from 'react-router-dom'
 export default function Navbar () {
-  var currentpage = window.location.pathname;
 
   return (
         <aside>

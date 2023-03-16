@@ -1,21 +1,40 @@
 import React,{useState,useEffect} from 'react'
 import profile_photo from '../../assets/images/profile-1.jpg';
-import axios from 'axios';
 import OrdersApi from '../../Api/OrdersApi';
+import {CSVLink} from 'react-csv';
+
 
 export default function Orders() {
     const [orders, setOrders] = useState([]);
-    // const [LoadData, setLoadData] = useState(true);
+    const block_effetc = true;
 
+    const headers = [
+      { label: "Nº", key: "id" },
+      { label: "Price per unit", key: "priceperunit" },
+      { label: "Quantity", key: "quantity" },
+      { label: "Total", key: "totalOrderPrice" },
+      { label: "Client Nº", key: "customerid" },
+      { label: "Product Nº", key: "productId" },
+      { label: "Order date", key: "orderDate" },
+      { label: "Status", key: "status" }
+    ];
     
     useEffect(() => {
         getData()
-      }, [true]);
-      const getData=async()=>{
-          await OrdersApi.getDataOrders.then((data)=>{
-              setOrders(data)
+    }, [block_effetc]);
+
+    const getData=async()=>{
+      await OrdersApi.getDataOrders.then((data)=>{
+          setOrders(data)
       })
     }
+
+    const csvReport = {
+      data: orders,
+      headers: headers,
+      filename: 'Orders.csv'
+    };
+
     return (
         <>
         <main >
@@ -37,6 +56,14 @@ export default function Orders() {
       <br />
       </div>
           <h1>Orders Data:</h1><hr />
+          <div className='right'>
+            <div className='top success'>
+              <div className="add-product">
+                <CSVLink {...csvReport} id='csv-add'>Export to CSV</CSVLink>
+            </div>
+            </div>
+          </div>  
+          
     
           <div className="products">
           <table>
@@ -79,7 +106,7 @@ export default function Orders() {
                 </tbody>
             </table><br />
             </div>
-        </main>
+        </main>      
       </>
       )
 }

@@ -55,7 +55,7 @@ main .products table thead th{
     border-radius: var(--card-border-radius);
 }
 
-#btn-add{
+#btn-add,#csv-add{
     display: flex;
     color: var(--color-info-dark);
     gap: 1rem;
@@ -70,6 +70,10 @@ main .products table thead th{
     justify-content: space-evenly;
 }
 
+#csv-add {
+    color: rgb(255, 255, 255);
+    background: rgb(34, 172, 34);
+}
 .add-product{
     margin-top: -5vh;
 }

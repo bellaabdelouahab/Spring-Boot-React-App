@@ -6,12 +6,13 @@ import OrdersApi from '../../Api/OrdersApi';
 import { Link } from 'react-router-dom';
 export default function Dashboard (){
   const [ordersData, setOrders] = useState([])
-  const [LoadData, setLoadData] = useState(true)
+  const block_effetc = true;
+  
   useEffect(()=>{
       OrdersApi.getDataOrders.then((data)=>{
         setOrders(data)
       })
-  },[LoadData])
+  },[block_effetc])
 
   return (
     <>
