@@ -1,7 +1,7 @@
 
 
 const getApiPath=()=>{
-    return "http://codmaster.com";
+    return "http://codemaster.com";
 }
 
 const config={getApiPath}
