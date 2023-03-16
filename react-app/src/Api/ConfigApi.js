@@ -1,7 +1,7 @@
 
 
 const getApiPath=()=>{
-    return "http://localhost:8081";
+    return "http://codmaster.com";
 }
 
 const config={getApiPath}
