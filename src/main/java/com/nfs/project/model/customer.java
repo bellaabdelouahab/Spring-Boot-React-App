@@ -29,7 +29,6 @@ public class customer implements Serializable{
     private int id;
     private String FirstName,LastName,Address,city,postalcode,phoneNumber;
     private LocalDate JoinDate;
-    private customer(){}
 
     public customer(String firstName, String lastName, String address, String city,
                     String postalcode, String phoneNumber) {

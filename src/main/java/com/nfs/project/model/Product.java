@@ -8,7 +8,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
+import lombok.Data;
 
+@Data
 @Table
 @Entity
 public class Product implements Serializable{
@@ -29,9 +31,6 @@ public class Product implements Serializable{
     private long price;
     private String name,description,type,imagesrc;
 
-    private Product() {
-
-    }
     public Product( String name, String Description, String Type, String imagesrc, long Price){
 
         this.description=Description;
@@ -47,67 +46,5 @@ public class Product implements Serializable{
         this.name=name;
         this.type=Type;
         this.price=Price;
-    }
-
-
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public long getPrice() {
-        return price;
-    }
-
-    public void setPrice(long price) {
-        this.price = price;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getImagesrc() {
-        return imagesrc;
-    }
-
-    public void setImagesrc(String imagesrc) {
-        this.imagesrc = imagesrc;
-    }
-
-    @Override
-    public String toString() {
-        return "products{" +
-                "id=" + id +
-                ", price=" + price +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", type='" + type + '\'' +
-                ", imagesrc='" + imagesrc + '\'' +
-                '}';
     }
 }

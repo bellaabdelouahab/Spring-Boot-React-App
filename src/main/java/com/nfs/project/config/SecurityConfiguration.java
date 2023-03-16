@@ -29,8 +29,16 @@ public class SecurityConfiguration {
   @Bean
   public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
       http.cors();
-      http
-              .csrf().disable()
+
+
+      // xss protection
+      http.headers()
+          .xssProtection()
+          .and()
+          .contentSecurityPolicy("script-src 'self'");
+
+
+      http.csrf().disable()
               .authorizeHttpRequests()
               .requestMatchers("/api/v1/auth/**").permitAll()
               .requestMatchers("/api/v1/app/**").authenticated()
@@ -48,9 +56,7 @@ public class SecurityConfiguration {
               .logoutSuccessUrl("/api/v1/auth/logout")
               .and()
               .exceptionHandling()
-              .authenticationEntryPoint((request, response, authException) -> {
-                  response.sendError(HttpServletResponse.SC_UNAUTHORIZED, authException.getMessage());
-              });
+              .authenticationEntryPoint((request, response, authException) -> response.sendError(HttpServletResponse.SC_UNAUTHORIZED, authException.getMessage()));
       return http.build();
   }
 
