@@ -16,7 +16,7 @@ import com.nfs.project.service.AuthenticationService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@CrossOrigin(origins = "*", allowCredentials = "true")
+@CrossOrigin(origins = {"http://localhost:3000", "http://codemaster.ninja"}, allowCredentials = "true")
 @RequestMapping("/api/v1/auth")
 @RequiredArgsConstructor
 public class AuthenticationController {

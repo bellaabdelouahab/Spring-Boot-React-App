@@ -17,7 +17,7 @@ import com.nfs.project.model.Product;
 import com.nfs.project.service.ProductService;
 
 @RestController
-@CrossOrigin(origins = "*", allowCredentials = "true")
+@CrossOrigin(origins = { "http://localhost:3000", "http://codemaster.ninja" }, allowCredentials = "true")
 @RequestMapping("/api/v1/app/product")
 public class ProductController {
 

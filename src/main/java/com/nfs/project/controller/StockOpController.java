@@ -18,7 +18,7 @@ import com.nfs.project.model.StockOperation;
 import com.nfs.project.service.StockOpService;
 
 @RestController
-@CrossOrigin(origins = "*", allowCredentials = "true")
+@CrossOrigin(origins = { "http://localhost:3000", "http://codemaster.ninja" }, allowCredentials = "true")
 @RequestMapping("/api/v1/app/stockop")
 public class StockOpController {
 
