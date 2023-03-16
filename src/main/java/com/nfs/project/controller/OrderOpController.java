@@ -50,11 +50,11 @@ public class OrderOpController {
     @GetMapping(path = "/product")
     public List<OrdersOperation> getAllOrdersByProductId(@RequestParam int productid){
         return Service.getOrderByProductId(productid);
-
     }
     @GetMapping("/customer")
     public List<OrdersOperation> getAllByCustomerId(@RequestParam int customerid){
         return Service.getOrderByCustomerId(customerid);
+
     }
 
 }

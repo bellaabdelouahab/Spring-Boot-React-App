@@ -32,41 +32,41 @@ public class OrdersOpService implements OrderOpServiceDAO {
     @Override
     public OrdersOperation getOrderById(int id) {
         return Repository.findById(id).get();
-    }
+    } 
 
     @Override
     public List<OrdersOperation> getOrderByProductId(int productid) {
-        return (List<OrdersOperation>) Repository.findAllByProductId(productid).get();
+        return Repository.findAllByProductId(productid);
     }
 
     @Override
     public List<OrdersOperation> getOrderByCustomerId(int customerId) {
-        return (List<OrdersOperation>) Repository.findAllByCustomerId(customerId).get();
+        return Repository.findAllByCustomerId(customerId);
     }
 
     @Override
     public List<OrdersOperation> getConfirmedOrders() {
-        return (List<OrdersOperation>) Repository.findAllByConfirmedOrdersValue(true).get();
+        return Repository.findAllByConfirmedOrdersValue(true);
     }
 
     @Override
     public List<OrdersOperation> getOrdersByOrderDate(LocalDate date) {
-        return (List<OrdersOperation>) Repository.findAllByOrOrderDate(date).get();
+        return Repository.findAllByOrOrderDate(date);
     }
 
     @Override
     public List<OrdersOperation> getShippedOrders() {
-        return (List<OrdersOperation>) Repository.findAllByShippedOrdersValue(true).get();
+        return Repository.findAllByShippedOrdersValue(true);
     }
 
     @Override
     public List<OrdersOperation> getNonConfirmedOrders() {
-        return (List<OrdersOperation>) Repository.findAllByConfirmedOrdersValue(false).get();
+        return Repository.findAllByConfirmedOrdersValue(false);
     }
 
     @Override
     public List<OrdersOperation> getNonShippedOrders() {
-        return (List<OrdersOperation>) Repository.findAllByShippedOrdersValue(false).get();
+        return Repository.findAllByShippedOrdersValue(false);
     }
 
     @Override
@@ -83,34 +83,24 @@ public class OrdersOpService implements OrderOpServiceDAO {
             throw new IllegalStateException("non valid data");
         }
     }
-    public boolean validateOrders(List<OrdersOperation> orders){
-        int incompleted=0;
-        int completed=0;
-        boolean value=false;
-        for(OrdersOperation op:orders){
-            if(op.getLabel()!="" && op.getPriceperunit()>0
-                    && productRepository.findById(op.getProductId()).isPresent()
-                    && customerRepository.findById(op.getId()).isPresent()
-                    &&  op.getQuantity()>0 && op.getTotalOrderPrice()>0
-            ){
-                completed++;
-            }
-            else{
-                // incompleted++;
-                op.setProductId(1);
-                op.setQuantity(1);
-                op.setTotalOrderPrice(1);
-                op.setPriceperunit(1);
-                op.setLabel("incomplete");
-                op.setOrderDate(LocalDate.now());
-                op.setCustomerid(7);
 
-            }
+    public boolean validateOrders(List<OrdersOperation> orders) {
+        long completed = orders.stream()
+                .filter(op -> isOrderCompleted(op))
+                .count();
+
+        return completed == orders.size();
+    }
+
+    private boolean isOrderCompleted(OrdersOperation op) {
+        if (op.getLabel().isEmpty() || op.getPriceperunit() <= 0 ||
+                !productRepository.existsById(op.getProductId()) ||
+                !customerRepository.existsById(op.getId()) ||
+                op.getQuantity() <= 0 || op.getTotalOrderPrice() <= 0) {
+            return false;
         }
-        if(incompleted==0){
-            value=true;
-        }
-        return value;
+
+        return true;
     }
 
     @Override
