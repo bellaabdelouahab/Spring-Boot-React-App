@@ -1,7 +1,6 @@
 package com.nfs.project.service;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.nfs.project.dao.ProductServiceDAO;
@@ -11,7 +10,7 @@ import com.nfs.project.repository.ProductRepository;
 public class ProductService implements ProductServiceDAO {
     private final ProductRepository repository;
 
-    @Autowired
+
     public ProductService(ProductRepository Repository){
         repository=Repository;
     }
