@@ -17,7 +17,7 @@ import com.nfs.project.model.customer;
 import com.nfs.project.service.CustomerService;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
+@CrossOrigin(origins = { "http://localhost:3000", "http://codemaster.ninja" }, allowCredentials = "true")
 @RequestMapping("/api/v1/app/customer")
 public class CustomerController {
 

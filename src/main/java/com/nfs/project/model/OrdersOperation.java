@@ -10,10 +10,12 @@ import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity(name = "orders_operation")
 @Table
+@NoArgsConstructor
 public class OrdersOperation implements Serializable {
     @Id
     @SequenceGenerator(

@@ -17,7 +17,7 @@ import com.nfs.project.model.OrdersOperation;
 import com.nfs.project.service.OrdersOpService;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
+@CrossOrigin(origins = { "http://localhost:3000", "http://codemaster.ninja" }, allowCredentials = "true")
 @RequestMapping("/api/v1/app/orders")
 public class OrderOpController {
 
