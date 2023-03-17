@@ -22,41 +22,45 @@ export default function Navbar () {
             </div>
 
             <div className="sidebar">
-                <NavLink to="/">
+                <NavLink to="/app/Dashboard">
                     <span className="material-icons-sharp">grid_view</span>
                     <h3>Dashboard</h3>
                 </NavLink>
 
-                <NavLink to="/customers">
+                <NavLink to="/app/customers">
                     <span className="material-icons-sharp">person_outline</span>
                     <h3>Customers</h3>
                 </NavLink>
 
-                <NavLink to="/orders">
+                <NavLink to="/app/orders">
                     <span className="material-icons-sharp">receipt_long</span>
                     <h3>Orders</h3>
                 </NavLink>
 
-                <NavLink to="/stock">
+                <NavLink to="/app/stock">
                     <span className="material-icons-sharp">receipt_long</span>
                     <h3>Stock</h3>
                 </NavLink>
 
-                <NavLink to="/products">
+                <NavLink to="/app/products">
                     <span className="material-icons-sharp">inventory</span>
                     <h3>Products</h3>
                 </NavLink>
 
-                <NavLink to="/setting">
+                <NavLink to="/app/setting">
                     <span className="material-icons-sharp">settings</span>
                     <h3>Settings</h3>
                 </NavLink>
 
+<<<<<<< HEAD
+                <NavLink to="/app/logout" >
+=======
                 <a onClick={()=>{
                         localStorage.removeItem("Auth");
                         document.cookie = "";
                         navigate("/login",{replace:true});
                     }}>
+>>>>>>> 40268584318352684541b80db157f0a2eac2edd6
                     <span className="material-icons-sharp">logout</span>
                     <h3>Logout</h3>
                 </a>
