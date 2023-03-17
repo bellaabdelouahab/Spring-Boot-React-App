@@ -45,7 +45,7 @@ export default function StockOperations() {
         <button id='menu-btn'>
           <span className="material-icons-sharp">menu</span>
         </button>
-        <div className='profile'>
+        <div className='profile' id="special_profile">
           <div className="info">
             <p> Hey, <b>Yassine</b></p>
             <small className="text-muted">Welcome Admin</small>

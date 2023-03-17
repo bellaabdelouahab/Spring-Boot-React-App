@@ -15,7 +15,7 @@ public class RegisterRequest {
 
   private String firstname;
   private String lastname;
-  @Email
+  @Email(message = "Email should be valid")
   private String email;
   private String password;
 }
