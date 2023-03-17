@@ -33,15 +33,13 @@ public class OrderBasket {
     @SequenceGenerator(name = "order_basket_seq", sequenceName = "ORDER_BASKET_SEQ", allocationSize = 1)
     private int basketid;
     
-    @Column(name = "productid")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "productid")
     private Product product;
 
-    @Column(name = "orderid")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "orderid")
-    private customer customer;
+    private OrdersOperation ordersOperation;
 
 
     @Column(name = "quantity")
