@@ -93,7 +93,7 @@ public class OrdersOpService implements OrderOpServiceDAO {
     }
 
     private boolean isOrderCompleted(OrdersOperation op) {
-        if (op.getLabel().isEmpty() || op.getPriceperunit() <= 0 ||
+        if (op.getLabel().isEmpty()  ||
                 !customerRepository.existsById(op.getId())  || op.getTotalOrderPrice() <= 0) {
             return false;
         }
@@ -104,11 +104,10 @@ public class OrdersOpService implements OrderOpServiceDAO {
     @Override
     public void SaveOrderOperation(OrdersOperation order) {
         System.out.println(order.getLabel() + "\n"
-                + order.getPriceperunit()
                 + "\n" + (customerRepository.findById(order.getId()).isPresent())
                 + "\n" +"\n"+order.getTotalOrderPrice());
 
-        if(order.getLabel()!="" && order.getPriceperunit()>0
+        if(order.getLabel()!="" 
                 && customerRepository.findById(order.getId()).isPresent()
                 && order.getTotalOrderPrice()>0
         ){
