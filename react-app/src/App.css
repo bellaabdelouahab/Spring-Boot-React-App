@@ -102,7 +102,7 @@
         width: 80%;
         position: absolute;
         left:52%;
-        top: 87%;
+        top: 120vh;
         transform: translateX(-50%);
         margin: 18rem 0 0 2.8rem;
         
@@ -114,11 +114,34 @@
     }
 
     .right .sales-analytics{
-        margin: 19rem 0 0 -56.8rem;
+        /* margin: 19rem 0 0 -56.8rem; */
         width: 25rem;
+
+        position: absolute;
+        left:20%;
+        top: 60vh;
     }
     .right .top {
         margin: 1.5rem 0 0 -30rem;
         width: 25rem;
     }
+
+    /* other pages */
+
+    #btn-add,#csv-add{
+      width: 10rem !important;
+    }
+
+    .add-product{
+      position: absolute;
+      left:55vw;
+    }
+
+    #special_profile{
+      width: 25rem;
+      position: absolute;
+      left:70vw;
+      top: 2.5vh;
+    }
+
 }

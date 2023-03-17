@@ -31,30 +31,29 @@ public class OrdersOperation implements Serializable {
     )
     private int id;
 
-    private int ProductId;
     @ManyToOne
     @JoinColumn(name="customer_id")
 //     @Valid
     private customer customerid;
     private String Label;
+    private String Status;
     private float TotalOrderPrice;
     private float priceperunit;
-    private LocalDate OrderDate;
+    private LocalDate OrderDate,ConfirmationDate,ShippingDate,ReceivingDate;
     private Boolean confirmed,Shipped,Received;
-    private int quantity;
-    public OrdersOperation(int productId, 
-                    customer customerid, String label,
-            float totalOrderPrice, float priceperunit, int quantity, boolean confirmed, LocalDate orderDate) {
-        this.ProductId = productId;
+    public OrdersOperation(customer customerid, String label,
+            float totalOrderPrice, float priceperunit, boolean confirmed) {
+
         this.customerid = customerid;
         this.Label = label;
         this.TotalOrderPrice = totalOrderPrice;
         this.priceperunit = priceperunit;
-        this.OrderDate = orderDate;
-        this.quantity = quantity;
+        this.OrderDate = LocalDate.now();
         this.confirmed = confirmed;
         this.Shipped = false;
         this.Received = false;
+        this.Status="pending";
+
 
     }
 

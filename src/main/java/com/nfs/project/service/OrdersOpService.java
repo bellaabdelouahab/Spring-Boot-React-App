@@ -94,9 +94,7 @@ public class OrdersOpService implements OrderOpServiceDAO {
 
     private boolean isOrderCompleted(OrdersOperation op) {
         if (op.getLabel().isEmpty() || op.getPriceperunit() <= 0 ||
-                !productRepository.existsById(op.getProductId()) ||
-                !customerRepository.existsById(op.getId()) ||
-                op.getQuantity() <= 0 || op.getTotalOrderPrice() <= 0) {
+                !customerRepository.existsById(op.getId())  || op.getTotalOrderPrice() <= 0) {
             return false;
         }
 
@@ -107,14 +105,12 @@ public class OrdersOpService implements OrderOpServiceDAO {
     public void SaveOrderOperation(OrdersOperation order) {
         System.out.println(order.getLabel() + "\n"
                 + order.getPriceperunit()
-                + "\n" + (productRepository.findById(order.getProductId()).isPresent())
                 + "\n" + (customerRepository.findById(order.getId()).isPresent())
-                + "\n" + (order.getQuantity() > 0 )+"\n"+order.getTotalOrderPrice());
+                + "\n" +"\n"+order.getTotalOrderPrice());
 
         if(order.getLabel()!="" && order.getPriceperunit()>0
-                && productRepository.findById(order.getProductId()).isPresent()
                 && customerRepository.findById(order.getId()).isPresent()
-                &&  order.getQuantity()>0 && order.getTotalOrderPrice()>0
+                && order.getTotalOrderPrice()>0
         ){
             Repository.save(order);
         }
