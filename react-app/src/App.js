@@ -11,6 +11,7 @@ import ModifierProducts from './components/Products/ModifierProducts';
 import StockOperations from './components/stock/stockoperation';
 import MainLogin from './components/Login/MainLogin';
 import AddStock from './components/stock/addStock';
+import HomePage from './components/Home/home';
 import BasicDocument from "./components/Orders/BasicDocument";
 import Mainsign from './components/SignIn/Mainsign';
 import PrivateRoutes from './components/PrivateRoutes';
@@ -19,6 +20,9 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
+          
+          {/* <Route element={<Root />}> */}
+          {/* <Route path="/Dashboard" element={<Dashboard />} /> */}
       <Route element={<PrivateRoutes />}>
 
         <Route path="/" element={<Root />}>
@@ -37,6 +41,7 @@ function App() {
 
       </Route>
         <Route path="/login" element={<MainLogin />} />
+        <Route path='/' element={<HomePage />} />
         <Route path="/SignIn" element={<Mainsign />} />
         <Route path="*" element={<MainLogin />} />
       </Routes>
