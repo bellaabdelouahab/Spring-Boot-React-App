@@ -52,15 +52,11 @@ export default function Navbar () {
                     <h3>Settings</h3>
                 </NavLink>
 
-<<<<<<< HEAD
-                <NavLink to="/app/logout" >
-=======
                 <a onClick={()=>{
                         localStorage.removeItem("Auth");
                         document.cookie = "";
                         navigate("/login",{replace:true});
                     }}>
->>>>>>> 40268584318352684541b80db157f0a2eac2edd6
                     <span className="material-icons-sharp">logout</span>
                     <h3>Logout</h3>
                 </a>

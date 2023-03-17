@@ -5,12 +5,13 @@ import ProductSection from "./ProductSection";
 import productsApi from "../../Api/ProductApi";
 import Cart from "./cart";
 import Checkout from "./Checkout";
+import DetailProduct from "./detailProduct";
 export default function HomePage() {
     const [Products, setProducts] = useState([]);
     const [load,setLoad]=useState(false);
     const [InCartProducts, setInCartProducts] = useState([]);
     const [OpenBasketWindow, setOpenBasketWindow] = useState(false)
-    const [OpenCheckoutWindow, setOpenCheckoutWindow] = useState(true)
+    const [OpenCheckoutWindow, setOpenCheckoutWindow] = useState(false)
     const onCloseBasket=()=>{
         setOpenBasketWindow(false)
     }
@@ -33,10 +34,10 @@ export default function HomePage() {
     const ModifyQuantity=(id,type,quantity)=>{
         const array=[]
         InCartProducts.map((prd)=>{
-            if(prd.id==id){
+            if(prd.id===id){
                 let q=1;
-                if(type=="i") q=prd.quantity+quantity;
-                if(type=="r") q=quantity;
+                if(type==="i") q=prd.quantity+quantity;
+                if(type==="r") q=quantity;
                 array.push({
                     id:prd.id,
                     quantity:q,
@@ -60,7 +61,7 @@ export default function HomePage() {
     const isInCarte=(id)=>{
         let v=false;
         InCartProducts.map((prd)=>{
-            if(prd.id==id){
+            if(prd.id===id){
                 v=true;
             }
         })
