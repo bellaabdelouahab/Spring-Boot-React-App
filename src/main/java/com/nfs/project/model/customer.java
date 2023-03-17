@@ -9,25 +9,20 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Table
 @NoArgsConstructor
+@Data
+@AllArgsConstructor
 public class customer implements Serializable{
+
     @Id
-    // @SequenceGenerator(
-    //         name="customerSquence",
-    //         sequenceName = "customerSquence",
-    //         allocationSize = 1
-    // )
-    // @GeneratedValue(
-    //         strategy = GenerationType.SEQUENCE,
-    //         generator = "customerSquence"
-    // )
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "custumerSquence")
     @SequenceGenerator(name = "custumerSquence", sequenceName = "CUSTUMERSQUENCE", allocationSize = 1)
-
     private int id;
     private String FirstName,LastName,Address,city,postalcode,phoneNumber;
     private LocalDate JoinDate;
@@ -42,6 +37,7 @@ public class customer implements Serializable{
         this.phoneNumber = phoneNumber;
         this.JoinDate=LocalDate.now();
     }
+    
 
     public int getId() {
         return id;

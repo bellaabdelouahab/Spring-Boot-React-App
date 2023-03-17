@@ -13,6 +13,7 @@ import com.nfs.project.payload.AuthenticationRequest;
 import com.nfs.project.payload.AuthenticationResponse;
 import com.nfs.project.service.AuthenticationService;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -25,7 +26,7 @@ public class AuthenticationController {
 
   @PostMapping("/register")
   public ResponseEntity<AuthenticationResponse> register(
-      @RequestBody RegisterRequest request
+      @Valid @RequestBody RegisterRequest request
   ) {
     return ResponseEntity.ok(service.register(request));
   }

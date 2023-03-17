@@ -13,11 +13,14 @@ import org.springframework.security.web.authentication.logout.LogoutHandler;
 
 import com.nfs.project.filters.JwtAuthenticationFilter;
 
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
+@Slf4j
 public class SecurityConfig {
 
     private final JwtAuthenticationFilter jwtAuthFilter;
@@ -29,6 +32,7 @@ public class SecurityConfig {
         
         return http.authorizeHttpRequests(authorize -> authorize
                 .requestMatchers("/api/v1/auth/**").permitAll()
+                .requestMatchers("/").permitAll()
                 .anyRequest().authenticated())
                 .csrf(AbstractHttpConfigurer::disable)
                 .authenticationProvider(authenticationProvider)
@@ -38,6 +42,17 @@ public class SecurityConfig {
                         .addLogoutHandler(logoutHandler)
                         .logoutSuccessHandler((request, response, authentication) -> SecurityContextHolder.clearContext())
                 )
+                .exceptionHandling(exceptionHandling -> exceptionHandling
+                        // redirect to index.html
+                        // .authenticationEntryPoint((request, response, authException) -> {
+                        //     log.info("not allowed");
+                        //     response.getWriter().write(authException.getMessage());
+                        //     response.setStatus(444);
+                        // })
+                        .accessDeniedHandler((request, response, accessDeniedException) -> {
+                            log.info("not allowed2");
+                  response.sendError(HttpServletResponse.SC_UNAUTHORIZED, accessDeniedException.getMessage());
+              }))
                 .build();
     }
 

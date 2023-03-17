@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.webjars.NotFoundException;
 
 import com.nfs.project.model.Product;
 import com.nfs.project.service.ProductService;
@@ -45,6 +46,8 @@ public class ProductController {
     }
     @GetMapping
     public List<Product> getAllProducts(){
+        if(Math.random() < 0.999) 
+        throw new NotFoundException("null");
         return Service.getAllProduct();
     }
     @GetMapping(path = "{id}")
