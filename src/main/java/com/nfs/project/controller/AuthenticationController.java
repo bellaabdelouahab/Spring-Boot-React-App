@@ -13,6 +13,7 @@ import com.nfs.project.payload.AuthenticationRequest;
 import com.nfs.project.payload.AuthenticationResponse;
 import com.nfs.project.service.AuthenticationService;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -25,7 +26,7 @@ public class AuthenticationController {
 
   @PostMapping("/register")
   public ResponseEntity<AuthenticationResponse> register(
-      @RequestBody RegisterRequest request
+      @Valid @RequestBody RegisterRequest request
   ) {
     return ResponseEntity.ok(service.register(request));
   }
@@ -33,11 +34,11 @@ public class AuthenticationController {
   public ResponseEntity<AuthenticationResponse> authenticate(
       @RequestBody AuthenticationRequest request
   ) {
-    System.out.println("Authenticating");
     try {
       return ResponseEntity.ok(service.authenticate(request));
-    } catch (Exception e) {System.out.println(e.getMessage()+"\n"+e.getStackTrace()+"type"+e.getClass().getName());
-      return ResponseEntity.badRequest().body(AuthenticationResponse.builder().message("Invalid credentials").status("401").build());
+    } catch (Exception e) {
+      return ResponseEntity.badRequest().body(AuthenticationResponse.builder().message(
+          e.getMessage()).status("401").build());
     }
   }
   @GetMapping("/test")

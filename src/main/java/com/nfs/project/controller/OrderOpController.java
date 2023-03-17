@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.nfs.project.model.OrdersOperation;
 import com.nfs.project.service.OrdersOpService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @CrossOrigin(origins = { "http://localhost:3000", "http://codemaster.ninja" }, allowCredentials = "true")
 @RequestMapping("/api/v1/app/orders")
@@ -26,7 +28,7 @@ public class OrderOpController {
     
 
     @PostMapping
-    public OrdersOperation SaveOrder(@RequestBody OrdersOperation operation) {
+    public OrdersOperation SaveOrder(@Valid @RequestBody OrdersOperation operation) {
         System.out.println(operation);
         Service.SaveOrderOperation(operation);
         return operation;
@@ -50,11 +52,11 @@ public class OrderOpController {
     @GetMapping(path = "/product")
     public List<OrdersOperation> getAllOrdersByProductId(@RequestParam int productid){
         return Service.getOrderByProductId(productid);
-
     }
     @GetMapping("/customer")
     public List<OrdersOperation> getAllByCustomerId(@RequestParam int customerid){
         return Service.getOrderByCustomerId(customerid);
+
     }
 
 }

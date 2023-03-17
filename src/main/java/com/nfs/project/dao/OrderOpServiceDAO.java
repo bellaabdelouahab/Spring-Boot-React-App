@@ -1,9 +1,9 @@
 package com.nfs.project.dao;
 
-import com.nfs.project.model.OrdersOperation;
-
 import java.time.LocalDate;
 import java.util.List;
+
+import com.nfs.project.model.OrdersOperation;
 
 public interface OrderOpServiceDAO {
     public List<OrdersOperation> getAllOrders();

@@ -7,6 +7,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.Data;
@@ -30,14 +32,18 @@ public class OrdersOperation implements Serializable {
     private int id;
 
     private int ProductId;
-    private int customerid;
+    @ManyToOne
+    @JoinColumn(name="customer_id")
+//     @Valid
+    private customer customerid;
     private String Label;
     private float TotalOrderPrice;
     private float priceperunit;
     private LocalDate OrderDate;
     private Boolean confirmed,Shipped,Received;
     private int quantity;
-    public OrdersOperation(int productId, int customerid, String label,
+    public OrdersOperation(int productId, 
+                    customer customerid, String label,
             float totalOrderPrice, float priceperunit, int quantity, boolean confirmed, LocalDate orderDate) {
         this.ProductId = productId;
         this.customerid = customerid;

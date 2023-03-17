@@ -20,7 +20,6 @@ public class ExceptionFilterHandler {
     // handle filter exception
     public void handleFilterException(HttpServletResponse response, Exception ex) throws ServletException, IOException {
 
-       if (ex instanceof io.jsonwebtoken.MalformedJwtException){
             response.setStatus(HttpStatus.UNAUTHORIZED.value());
             System.out.println("expired"+HttpStatus.UNAUTHORIZED.value());
             ObjectMapper mapper = new ObjectMapper();
@@ -33,7 +32,6 @@ public class ExceptionFilterHandler {
                             "/api/v1/auth/login"
                     ));
             response.getWriter().write(jsonString);
-       }
     }
 
     @Data

@@ -1,10 +1,10 @@
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import React,{useState} from 'react';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios"
 
-export default function LoginBody() {
+export default function SignupBody() {
     
     const toastOptions = {
         position: "top-right",
@@ -36,44 +36,44 @@ export default function LoginBody() {
       const handleSubmit = async (event) => {
         event.preventDefault();
         if (validateForm()) {
-          try {
-            const { username, password } = values;
-            console.log(values);
-            const  data  = await axios.post(
-              "http://localhost:8081/api/v1/auth/authenticate",
-              {
-                email: username,
-                password:password,
-              }
-            );
-            
-            if (data.status === 200) {
+          const { username,email, password,confpassword } = values;
+          console.log(values);
+          if (password !== confpassword) {
+            toast.error("Password is not match", toastOptions);
+          } else if (password === confpassword){
+            try {
+              const { data } = await axios.post(
+                "http://localhost:8081/api/v1/auth/register",
+                {
+                  firstname: username,
+                  email: email,
+                  password:password,
+                }
+              );
+              document.cookie = data.token;
               localStorage.setItem(
                 "Auth",
-                JSON.stringify(document.cookie)
+                JSON.stringify(data.token)
               );
-              navigate("/");
+              navigate("/login");
             }
-            else{
-              toast.error("There is an error plz check you're information", toastOptions);
-            }
-            }catch (error) {
+            catch (error){
               toast.error("Something going wrong", toastOptions);
+          }}
+            
           }
         }
-      };
 
 
     return(
         <div>
             <div className="form-container-login">
                 <form onSubmit={(event) => handleSubmit(event)}>
-                    <input type='email' placeholder="You're email" name="username" onChange={(e) => handleChange(e)}/><br/>
+                    <input type='text' placeholder="You're username" name="username" onChange={(e) => handleChange(e)}/><br/>
+                    <input type='email' placeholder="You're email" name="email" onChange={(e) => handleChange(e)}/><br/>
                     <input type='password' placeholder="You're password" name="password" onChange={(e) => handleChange(e)}/><br/>
-                    <button type='submit'>Log in</button><br /><br/>
-                    <div className="signup-message-panel">
-                        if You don't have Already an Account please <Link id='link' to={'/SignIn'}>Sign in</Link>
-                    </div>
+                    <input type='password' placeholder="Confirmed password" name="confpassword" onChange={(e) => handleChange(e)}/><br/>
+                    <button type='submit'>Sign Up</button><br />
                 </form>
             </div>
             <ToastContainer />

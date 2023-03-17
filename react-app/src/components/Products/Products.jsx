@@ -62,7 +62,7 @@ export default function Products () {
       <h1>Products :</h1><hr />
       <div className='right'>
     <div className='top'>
-      <div className="add-product" style={{"justify-content":"space-evenly","display":"flex","width":350}}>
+      <div className="add-product" style={{"justifyContent":"space-evenly","display":"flex","width":350}}>
         <button id='btn-add' onClick={() => {
                 window.open("/products/add", "_blank");
             }}>

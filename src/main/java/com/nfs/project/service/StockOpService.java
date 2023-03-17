@@ -3,7 +3,6 @@ package com.nfs.project.service;
 import java.time.LocalDate;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.nfs.project.dao.StockOpServiceDAO;
@@ -16,7 +15,6 @@ public class StockOpService implements StockOpServiceDAO {
     private final StockOpRepository Repository;
     private final ProductRepository productRepository;
 
-    @Autowired
     public StockOpService(StockOpRepository repository,ProductRepository ProductRepository){
         Repository=repository;
         productRepository=ProductRepository;
@@ -34,12 +32,12 @@ public class StockOpService implements StockOpServiceDAO {
 
     @Override
     public List<StockOperation> getStockOperationsByProductId(int productId) {
-        return (List<StockOperation>) Repository.findAllByProductId(productId).get();
+        return (List<StockOperation>) Repository.findAllByProductId(productId);
     }
 
     @Override
     public List<StockOperation> getStockOperationsByEnterDate(LocalDate Date) {
-        return (List<StockOperation>) Repository.findAllByEnteredDate(Date).get();
+        return (List<StockOperation>) Repository.findAllByEnteredDate(Date);
     }
 
     @Override

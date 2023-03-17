@@ -2,9 +2,10 @@ import React,{useState,useEffect} from 'react'
 import profile_photo from '../../assets/images/profile-1.jpg';
 import OrdersApi from '../../Api/OrdersApi';
 import {CSVLink} from 'react-csv';
-
+import { useNavigate } from "react-router-dom";
 
 export default function Orders() {
+    const navigate = useNavigate();
     const [orders, setOrders] = useState([]);
     const block_effetc = true;
 
@@ -33,6 +34,10 @@ export default function Orders() {
       data: orders,
       headers: headers,
       filename: 'Orders.csv'
+    };
+
+    const generer_bill = (order) => {
+      navigate("/orders/bill", { state: order });
     };
 
     return (
@@ -96,7 +101,7 @@ export default function Orders() {
                                 <span class="material-icons-sharp" style={{"color":"var(--color-danger)"}}>
                                   edit
                                 </span>
-                                <span class="material-icons-sharp" style={{"color":"var(--color-black)"}}>
+                                <span class="material-icons-sharp" style={{"color":"var(--color-black)"}} onClick={()=>generer_bill(order)}>
                                   article
                                 </span>
                               </div>

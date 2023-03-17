@@ -19,9 +19,11 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Component
 @RequiredArgsConstructor
+@Slf4j
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
   private final JwtService jwtService;
@@ -34,6 +36,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
       @NonNull HttpServletResponse response,
       @NonNull FilterChain filterChain
   ) throws ServletException, IOException {
+    log.info("[ "+request.getMethod()+" ] : "+request.getRequestURL());
     final String authHeader = request.getHeader("Authorization");
     final String jwt;
     final String userEmail;
@@ -62,7 +65,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         SecurityContextHolder.getContext().setAuthentication(authToken);
       }
     }
-    System.out.println("uri ==>"+ request.getRequestURI());
   }
     catch(io.jsonwebtoken.JwtException e){
       exceptionFilterHandler.handleFilterException(response, e);
