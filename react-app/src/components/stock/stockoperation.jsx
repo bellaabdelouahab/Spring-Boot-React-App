@@ -60,7 +60,7 @@ export default function StockOperations() {
           <h1>Stock Data:</h1><hr />
           <div className='right'>
             <div className='top'>
-              <div className="add-product" style={{"justify-content":"space-evenly","display":"flex","width":350}}>
+              <div className="add-product" style={{"justifyContent":"space-evenly","display":"flex","width":350}}>
                 <button id='btn-add' onClick={() => {
                         window.open("/stock/add", "_blank");
                     }}>

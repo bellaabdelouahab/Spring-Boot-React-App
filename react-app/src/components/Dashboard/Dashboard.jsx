@@ -4,15 +4,48 @@ import profile_photo from '../../assets/images/profile-1.jpg';
 import { useState,useEffect } from 'react';
 import OrdersApi from '../../Api/OrdersApi';
 import { Link } from 'react-router-dom';
+import productsApi from '../../Api/ProductApi';
+
 export default function Dashboard (){
-  const [ordersData, setOrders] = useState([])
+  const [ordersData, setOrders] = useState([]);
+  const [products, setProducts] = useState([]);
+  const [LoadData, setLoadData] = useState(true)
+
   const block_effetc = true;
   
   useEffect(()=>{
-      OrdersApi.getDataOrders.then((data)=>{
-        setOrders(data)
-      })
-  },[block_effetc])
+    OrdersApi.getDataOrders.then((data)=>{
+      setOrders(data)
+    });
+    getProdData();
+
+  },[LoadData])
+
+  const getProdData=async()=>{
+    productsApi.getProducts.then((data)=>{
+      setProducts(data)
+    })
+    setLoadData(false)
+  }
+
+  const TotalSales = () => {
+    let total = 0;
+    ordersData.forEach((order) => {
+      if(order.orderDate.split('-')[0] === new Date().getFullYear().toString()){
+        total += order.priceperunit * order.quantity;
+      }
+    });
+    return total;
+  }
+
+  const TotalIncomes = () => {  
+    let total = 0;
+    products.forEach((product) => {
+      total += product.price;
+    });
+    console.log("total",total);
+    return total-TotalSales();
+  }
 
   return (
     <>
@@ -26,7 +59,7 @@ export default function Dashboard (){
                 <div className="middle">
                     <div className='left'>
                         <h3>Total Sales</h3>
-                        <h1>$25,024</h1>
+                        <h1>{TotalSales()} DH</h1>
                     </div>
                     <div className='progress'>
                         <svg>
@@ -37,7 +70,7 @@ export default function Dashboard (){
                         </div>
                     </div>
                 </div>
-                <small className='text-muted'>Last 24 Hours</small>
+                <small className='text-muted'>This Month</small>
             </div>
 
             <div className="expenses">
@@ -56,7 +89,7 @@ export default function Dashboard (){
                         </div>
                     </div>
                 </div>
-                <small className='text-muted'>Last 24 Hours</small>
+                <small className='text-muted'>This Month</small>
             </div>
 
             <div className="income">
@@ -64,7 +97,7 @@ export default function Dashboard (){
                 <div className="middle">
                     <div className='left'>
                         <h3>Total incomes</h3>
-                        <h1>$25,024</h1>
+                        <h1>{TotalIncomes()} DH</h1>
                     </div>
                     <div className='progress'>
                         <svg>
@@ -75,7 +108,7 @@ export default function Dashboard (){
                         </div>
                     </div>
                 </div>
-                <small className='text-muted'>Last 24 Hours</small>
+                <small className='text-muted'>This Month</small>
             </div>
         </div>
         <br />
@@ -152,7 +185,7 @@ export default function Dashboard (){
         <div className='right'>
           <div className='info'>
             <h3>ONLINE ORDERS</h3>
-            <small className="text-muted">Last 24 Hours</small>
+            <small className="text-muted">This Month</small>
           </div>
           <h5 className='success'>+39%</h5>
           <h3>3888</h3>
@@ -166,7 +199,7 @@ export default function Dashboard (){
         <div className='right'>
           <div className='info'>
             <h3>OFFLINE ORDERS</h3>
-            <small className="text-muted">Last 24 Hours</small>
+            <small className="text-muted">This Month</small>
           </div>
           <h5 className='danger'>-19%</h5>
           <h3>1034</h3>
@@ -180,7 +213,7 @@ export default function Dashboard (){
         <div className='right'>
           <div className='info'>
             <h3>NEW CUSTOMERS</h3>
-            <small className="text-muted">Last 24 Hours</small>
+            <small className="text-muted">This Month</small>
           </div>
           <h5 className='success'>+20%</h5>
           <h3>40</h3>

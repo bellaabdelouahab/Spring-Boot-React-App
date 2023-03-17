@@ -2,8 +2,10 @@ import React from 'react'
 import './navbar.css'
 import closeLogo from '../../assets/images/close.svg'
 import logo from '../../assets/images/logo.png'
-import { NavLink } from 'react-router-dom'
+import { NavLink,useNavigate } from 'react-router-dom';
+
 export default function Navbar () {
+    const navigate = useNavigate();
 
   return (
         <aside>
@@ -50,10 +52,14 @@ export default function Navbar () {
                     <h3>Settings</h3>
                 </NavLink>
 
-                <NavLink to="/logout" >
+                <a onClick={()=>{
+                        localStorage.removeItem("Auth");
+                        document.cookie = "";
+                        navigate("/login",{replace:true});
+                    }}>
                     <span className="material-icons-sharp">logout</span>
                     <h3>Logout</h3>
-                </NavLink>
+                </a>
             </div>
 
         </aside>
