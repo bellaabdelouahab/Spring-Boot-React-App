@@ -46,8 +46,8 @@ public class ProductController {
     }
     @GetMapping
     public List<Product> getAllProducts(){
-        if(Math.random() < 0.999) 
-        throw new NotFoundException("null");
+        /*if(Math.random() < 0.999)
+        throw new NotFoundException("null");*/
         return Service.getAllProduct();
     }
     @GetMapping(path = "{id}")
