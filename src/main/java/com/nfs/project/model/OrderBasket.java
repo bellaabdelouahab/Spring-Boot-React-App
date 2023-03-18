@@ -48,5 +48,12 @@ public class OrderBasket {
     @Column(name = "priceperunit")
     private double priceperunit;
 
+    public OrderBasket(Product Product,OrdersOperation OrdersOperation,int quantity,double priceperunit){
+        this.product=Product;
+        this.ordersOperation=OrdersOperation;
+        this.quantity=quantity;
+        this.priceperunit=priceperunit;
+    }
+
     
 }

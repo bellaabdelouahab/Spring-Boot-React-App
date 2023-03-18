@@ -11,10 +11,15 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
 @Data
+@Builder
+@AllArgsConstructor
 @Entity(name = "orders_operation")
 @Table
 @NoArgsConstructor
@@ -34,7 +39,7 @@ public class OrdersOperation implements Serializable {
     private customer customerid;
     
     public OrdersOperation(customer customerid, String label,
-            float totalOrderPrice, float priceperunit, boolean confirmed) {
+            float totalOrderPrice, boolean confirmed) {
 
         this.customerid = customerid;
         this.Label = label;

@@ -8,25 +8,19 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
+@Builder
 @Table
 @Entity
+@AllArgsConstructor
 @NoArgsConstructor
 public class Product implements Serializable{
     @Id
-    // @SequenceGenerator(
-    //         name="productSquence",
-    //         sequenceName = "productSquence",
-    //         allocationSize = 1
-    // )
-    // @GeneratedValue(
-    //         strategy = GenerationType.SEQUENCE,
-    //         generator = "productSquence"
-    // )
-
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "productSquence")
     @SequenceGenerator(name = "productSquence", sequenceName = "PRODUCTSQUENCE", allocationSize = 1)
     private int id;
@@ -41,12 +35,5 @@ public class Product implements Serializable{
         this.type=Type;
         this.price=Price;
     }
-    public Product(int id, String name, String Description, String Type, String imagesrc, long Price){
-        this.id=id;
-        this.description=Description;
-        this.imagesrc=imagesrc;
-        this.name=name;
-        this.type=Type;
-        this.price=Price;
-    }
+
 }

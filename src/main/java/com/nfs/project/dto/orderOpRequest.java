@@ -14,6 +14,6 @@ public class orderOpRequest {
     private int customerId;
     private String label;
     private float totalOrderPrice;
-    private float priceperunit;
+
     private boolean confirmed;
 }

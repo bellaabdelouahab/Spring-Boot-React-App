@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.nfs.project.model.customer;
 import com.nfs.project.service.CustomerService;
-
+import com.nfs.project.dto.customerRequest;
 @RestController
 @CrossOrigin(origins = { "http://localhost:3000", "http://codemaster.ninja" }, allowCredentials = "true")
 @RequestMapping("/api/v1/app/customer")
@@ -30,16 +30,12 @@ public class CustomerController {
     }
 
     @PostMapping
-    public customer saveCustomer(@RequestBody customer customer){
-        Service.AddCustomer(customer);
-        return customer;
+    public customer saveCustomer(@RequestBody customerRequest customer){
+        return Service.AddCustomer(customer);
     }
     @PostMapping(path = "/list")
-    public List<customer> saveCustomers(@RequestBody List<customer> listofCustomers){
-        for(customer customer:listofCustomers){
-            Service.AddCustomer(customer);
-        }
-        return listofCustomers;
+    public List<customer> saveCustomers(@RequestBody List<customerRequest> listofCustomers){
+        return Service.AddCustomersList(listofCustomers);
     }
 
     @GetMapping(path = "{id}")

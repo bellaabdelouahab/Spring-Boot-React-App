@@ -20,7 +20,7 @@ public class productRequest {
     private String imagesrc;
 
     @Min(value = 1)
-    private float price;
+    private long price;
 
     @NotBlank
     private String type;

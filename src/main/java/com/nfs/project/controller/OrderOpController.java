@@ -17,6 +17,7 @@ import com.nfs.project.model.OrdersOperation;
 import com.nfs.project.service.OrdersOpService;
 
 import jakarta.validation.Valid;
+import com.nfs.project.dto.orderOpRequest;
 
 @RestController
 @CrossOrigin(origins = { "http://localhost:3000", "http://codemaster.ninja" }, allowCredentials = "true")
@@ -28,17 +29,13 @@ public class OrderOpController {
     
 
     @PostMapping
-    public OrdersOperation SaveOrder(@Valid @RequestBody OrdersOperation operation) {
-        System.out.println(operation);
-        Service.SaveOrderOperation(operation);
-        return operation;
+    public OrdersOperation SaveOrder(@Valid @RequestBody orderOpRequest operation) {
+        return Service.SaveOrderOperation(operation);
     }
 
     @PostMapping(path = "/list")
-    public List<OrdersOperation> SaveOrderList(@RequestBody List<OrdersOperation> operation) {
-
-        Service.SaveOrdersOperations(operation);
-        return operation;
+    public List<OrdersOperation> SaveOrderList(@RequestBody List<orderOpRequest> ListOperation) {
+        return Service.SaveOrdersOperations(ListOperation);
     }
 
     @GetMapping
@@ -49,10 +46,7 @@ public class OrderOpController {
     public OrdersOperation getOrdersById(@PathVariable int id){
         return Service.getOrderById(id);
     }
-    @GetMapping(path = "/product")
-    public List<OrdersOperation> getAllOrdersByProductId(@RequestParam int productid){
-        return Service.getOrderByProductId(productid);
-    }
+
     @GetMapping("/customer")
     public List<OrdersOperation> getAllByCustomerId(@RequestParam int customerid){
         return Service.getOrderByCustomerId(customerid);

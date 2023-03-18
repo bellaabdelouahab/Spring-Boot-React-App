@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.nfs.project.model.StockOperation;
 import com.nfs.project.service.StockOpService;
+import com.nfs.project.dto.stockOpRequest;
 
 @RestController
 @CrossOrigin(origins = { "http://localhost:3000", "http://codemaster.ninja" }, allowCredentials = "true")
@@ -46,14 +47,12 @@ public class StockOpController {
         Service.updateConsumedQuantity(id,quantity);
     }
     @PostMapping
-    public StockOperation saveStockOperation(@RequestBody StockOperation op){
-        Service.SaveStockOp(op);
-        return op;
+    public StockOperation saveStockOperation(@RequestBody stockOpRequest Stockop){
+        return Service.SaveStockOp(Stockop);
     }
     @PostMapping(path = "/list")
-    public List<StockOperation> saveStockOperations(@RequestBody List<StockOperation> ops){
-        Service.SaveStockOps(ops);
-        return ops;
+    public List<StockOperation> saveStockOperations(@RequestBody List<stockOpRequest> ListStockops){
+        return Service.SaveListStockOps(ListStockops);
     }
 
 }

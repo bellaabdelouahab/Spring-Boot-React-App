@@ -15,8 +15,8 @@ public interface OrderOpRepository extends JpaRepository<OrdersOperation,Integer
     List<OrdersOperation> findAllByShippedOrdersValue(Boolean Shipped);
     @Query("SELECT s FROM orders_operation s where  s.Received=?1")
     List<OrdersOperation> findAllByReceivedOrdersValue(Boolean Received);
-    @Query("SELECT s FROM orders_operation s where  s.ProductId=?1")
-    List<OrdersOperation> findAllByProductId(int productId);
+    /*@Query("SELECT s FROM orders_operation s where  s.ProductId=?1")
+    List<OrdersOperation> findAllByProductId(int productId);*/
     @Query("SELECT s FROM orders_operation s where  s.customerid=?1")
     List<OrdersOperation> findAllByCustomerId(int CustomerId);
     @Query("SELECT s FROM orders_operation s where  s.OrderDate=?1")

@@ -4,6 +4,8 @@ package com.nfs.project.service;
 import java.time.LocalDate;
 import java.util.List;
 
+import com.nfs.project.dto.orderOpRequest;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.nfs.project.dao.OrderOpServiceDAO;
@@ -17,6 +19,8 @@ public class OrdersOpService implements OrderOpServiceDAO {
     private OrderOpRepository Repository;
     private ProductRepository productRepository;
     private CustomerRepository customerRepository;
+
+
     public OrdersOpService(OrderOpRepository repository,ProductRepository ProductRepository,
         CustomerRepository CustomerRepository
     ){
@@ -33,11 +37,6 @@ public class OrdersOpService implements OrderOpServiceDAO {
     public OrdersOperation getOrderById(int id) {
         return Repository.findById(id).get();
     } 
-
-    @Override
-    public List<OrdersOperation> getOrderByProductId(int productid) {
-        return Repository.findAllByProductId(productid);
-    }
 
     @Override
     public List<OrdersOperation> getOrderByCustomerId(int customerId) {
@@ -70,18 +69,12 @@ public class OrdersOpService implements OrderOpServiceDAO {
     }
 
     @Override
-    public void SaveOrdersOperations(List<OrdersOperation> orders) {
-        if(validateOrders(orders)){
-            for(OrdersOperation op:orders){
-                op.setOrderDate(LocalDate.now());
-                op.setReceived(false);
-                op.setShipped(false);
-                Repository.save(op);
-            }
+    public List<OrdersOperation> SaveOrdersOperations(List<orderOpRequest> orders) {
+        List<OrdersOperation> ListOrders=null;
+        for(orderOpRequest req:orders){
+            ListOrders.add(SaveOrderOperation(req));
         }
-        else{
-            throw new IllegalStateException("non valid data");
-        }
+        return ListOrders;
     }
 
     public boolean validateOrders(List<OrdersOperation> orders) {
@@ -102,20 +95,14 @@ public class OrdersOpService implements OrderOpServiceDAO {
     }
 
     @Override
-    public void SaveOrderOperation(OrdersOperation order) {
-        System.out.println(order.getLabel() + "\n"
-                + "\n" + (customerRepository.findById(order.getId()).isPresent())
-                + "\n" +"\n"+order.getTotalOrderPrice());
-
-        if(order.getLabel()!="" 
-                && customerRepository.findById(order.getId()).isPresent()
-                && order.getTotalOrderPrice()>0
-        ){
-            Repository.save(order);
-        }
-        else{
-            throw new IllegalStateException("non valid data");
-        }
+    public OrdersOperation SaveOrderOperation(orderOpRequest order) {
+        String Status="pending";
+        if(order.isConfirmed()) Status="confirmed";
+        var orderOpObj=OrdersOperation.builder().OrderDate(LocalDate.now()).TotalOrderPrice(order.getTotalOrderPrice())
+                .Label(order.getLabel()).confirmed(order.isConfirmed()).Shipped(false).Received(false)
+                .customerid(customerRepository.findById(order.getCustomerId()).get()).Status(Status).build();
+        Repository.save(orderOpObj);
+        return orderOpObj;
     }
 
     @Override

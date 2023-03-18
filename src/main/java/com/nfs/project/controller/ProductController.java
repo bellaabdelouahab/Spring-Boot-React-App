@@ -16,6 +16,7 @@ import org.webjars.NotFoundException;
 
 import com.nfs.project.model.Product;
 import com.nfs.project.service.ProductService;
+import com.nfs.project.dto.productRequest;
 
 @RestController
 @CrossOrigin(origins = { "http://localhost:3000", "http://codemaster.ninja" }, allowCredentials = "true")
@@ -26,23 +27,12 @@ public class ProductController {
     private ProductService Service;
 
     @PostMapping
-    public Product saveProduct(@RequestBody Product product){
-        try{
-
-            Service.saveProduct(product);
-            return product;
-        }
-        catch (Exception e){
-            System.out.println(e.getMessage());
-            return null;
-        }
+    public Product saveProduct(@RequestBody productRequest product){
+        return Service.saveProduct(product);
     }
     @PostMapping(path = "/list")
-    public List<Product> saveProducts(@RequestBody List<Product> listproducts){
-        for(Product product:listproducts){
-            Service.saveProduct(product);
-        }
-        return listproducts;
+    public List<Product> saveProducts(@RequestBody List<productRequest> listproducts){
+        return Service.SaveProductList(listproducts);
     }
     @GetMapping
     public List<Product> getAllProducts(){
