@@ -30,11 +30,17 @@ public class CustomerService implements CustomerServiceDAO {
 
     @Override
     public customer AddCustomer(customerRequest customerObj) {
-        var customerValue=customer.builder().Address(customerObj.getAddress()).FirstName(customerObj.getFirstname())
-                .LastName((customerObj.getLastname())).city(customerObj.getCity()).postalcode(customerObj.getPostalcode())
-                .JoinDate(LocalDate.now()).phoneNumber(customerObj.getPhoneNumber()).build();
-        Repository.save(customerValue);
-        return customerValue;
+        try{
+            var customerValue=customer.builder().Address(customerObj.getAddress()).FirstName(customerObj.getFirstname())
+                    .LastName((customerObj.getLastname())).city(customerObj.getCity()).postalcode(customerObj.getPostalcode())
+                    .JoinDate(LocalDate.now()).phoneNumber(customerObj.getPhoneNumber()).build();
+            Repository.save(customerValue);
+            return customerValue;
+        }
+        catch(Exception e){
+            throw new IllegalStateException(e.getMessage());
+        }
+
     }
 
     @Override
