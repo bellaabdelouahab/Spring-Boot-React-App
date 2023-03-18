@@ -7,7 +7,6 @@ package com.nfs.project.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -33,11 +32,11 @@ public class OrderBasket {
     @SequenceGenerator(name = "order_basket_seq", sequenceName = "ORDER_BASKET_SEQ", allocationSize = 1)
     private int basketid;
     
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne()
     @JoinColumn(name = "productid")
     private Product product;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne()
     @JoinColumn(name = "orderid")
     private OrdersOperation ordersOperation;
 

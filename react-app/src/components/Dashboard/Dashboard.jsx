@@ -32,7 +32,7 @@ export default function Dashboard (){
     let total = 0;
     ordersData.forEach((order) => {
       if(order.orderDate.split('-')[0] === new Date().getFullYear().toString()){
-        total += order.priceperunit * order.quantity;
+        total += order.totalOrderPrice
       }
     });
     return total;
@@ -118,10 +118,8 @@ export default function Dashboard (){
                 <thead>
                 <tr>
                       <th>Nº</th>
-                      <th>Price per unit</th>
-                      <th>Quantity</th>
                       <th>Total</th>
-                      <th>Client Nº</th>
+                      <th>Client name</th>
                       <th>Product Nº</th>
                       <th>Order date</th>
                       <th>Status</th>
@@ -135,7 +133,7 @@ export default function Dashboard (){
                           <td>{order.priceperunit} DH</td>
                           <td>{order.quantity}</td>
                           <td>{order.totalOrderPrice} DH</td>
-                          <td>{order.customerid}</td>
+                          <td>{order.customer.firstname}</td>
                           <td>{order.productId}</td>
                           <td>{order.orderDate}</td>
                           <td>{OrdersApi.statusOrder(order)}</td>

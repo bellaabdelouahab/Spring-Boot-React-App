@@ -27,13 +27,4 @@ public class Product implements Serializable{
     private long price;
     private String name,description,type,imagesrc;
 
-    public Product( String name, String Description, String Type, String imagesrc, long Price){
-
-        this.description=Description;
-        this.imagesrc=imagesrc;
-        this.name=name;
-        this.type=Type;
-        this.price=Price;
-    }
-
 }

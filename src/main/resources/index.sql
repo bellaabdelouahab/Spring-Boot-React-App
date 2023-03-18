@@ -117,3 +117,13 @@ DELETE FROM order_basket;
 DELETE FROM stock_operation;
 -- DELETE FROM product;
 DELETE FROM customer;
+
+
+
+-- {
+--   "customerId": 114,
+--   "label": "5-500 - Metal Fabrications",
+--   "totalOrderPrice": 921
+-- }
+
+insert into ORDERS_OPERATION (id,customerid, label, total_order_price, order_date) values (1,114, '5-500 - Metal Fabrications', 921, sysdate);

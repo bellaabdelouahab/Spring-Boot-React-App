@@ -4,9 +4,9 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.nfs.project.dao.ProductServiceDAO;
+import com.nfs.project.dto.productRequest;
 import com.nfs.project.model.Product;
 import com.nfs.project.repository.ProductRepository;
-import com.nfs.project.dto.productRequest;
 @Service
 public class ProductService implements ProductServiceDAO {
     private final ProductRepository repository;
@@ -25,7 +25,9 @@ public class ProductService implements ProductServiceDAO {
         if(repository.findById(id).isPresent()){
             return repository.findById(id).get();
         }
-        else throw new IllegalStateException("error try again");
+        else {
+            throw new IllegalStateException("error try again");
+        }
     }
 
     @Override
@@ -54,6 +56,8 @@ public class ProductService implements ProductServiceDAO {
             product.setPrice(price);
             product.setName(name);
             product.setDescription(desc);
+            // update the product
+            repository.save(product);
         }
         else{
             throw new IllegalStateException("error try again");
