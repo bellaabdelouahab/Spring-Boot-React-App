@@ -30,6 +30,7 @@ public class CustomerService implements CustomerServiceDAO {
 
     @Override
     public customer AddCustomer(customerRequest customerObj) {
+        System.out.printf(customerObj.toString());
         try{
             var customerValue=customer.builder().Address(customerObj.getAddress()).FirstName(customerObj.getFirstname())
                     .LastName((customerObj.getLastname())).city(customerObj.getCity()).postalcode(customerObj.getPostalcode())
