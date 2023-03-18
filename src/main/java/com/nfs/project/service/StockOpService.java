@@ -9,6 +9,7 @@ import com.nfs.project.dao.StockOpServiceDAO;
 import com.nfs.project.model.StockOperation;
 import com.nfs.project.repository.ProductRepository;
 import com.nfs.project.repository.StockOpRepository;
+import com.nfs.project.dto.stockOpRequest;
 
 @Service
 public class StockOpService implements StockOpServiceDAO {
@@ -41,22 +42,19 @@ public class StockOpService implements StockOpServiceDAO {
     }
 
     @Override
-    public void SaveStockOp(StockOperation StockOp) {
-        
-        if(productRepository.findById(StockOp.getProductId()).isPresent() &&
-            StockOp.getLabel()!=""
-        ){
-            StockOp.setQuantityConsumed(0);
-            StockOp.setEnteredDate(LocalDate.now());
-            Repository.save(StockOp);
+    public StockOperation SaveStockOp(stockOpRequest StockOp) {
+        var stockOp_obj=StockOperation.builder().Label(StockOp.getLabel()).productId(StockOp.getProductId())
+                .quantity(StockOp.getQuantity()).build();
+        return stockOp_obj;
+    }
+
+    @Override
+    public List<StockOperation> SaveListStockOps(List<stockOpRequest> StockOpList) {
+        List<StockOperation> ListStockOp_objs=null;
+        for (stockOpRequest Req:StockOpList){
+            ListStockOp_objs.add(SaveStockOp(Req));
         }
-        else{
-            // throw new IllegalStateException("Non Valid Format");
-            StockOp.setProductId(1);
-            StockOp.setQuantityConsumed(0);
-            StockOp.setEnteredDate(LocalDate.now());
-            Repository.save(StockOp);
-        }
+        return ListStockOp_objs;
     }
 
     @Override
@@ -70,9 +68,5 @@ public class StockOpService implements StockOpServiceDAO {
         }
     }
 
-    public void SaveStockOps(List<StockOperation> ops) {
-        for(StockOperation op:ops){
-            SaveStockOp(op);
-        }
-    }
+
 }

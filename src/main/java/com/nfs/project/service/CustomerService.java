@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.nfs.project.dao.CustomerServiceDAO;
 import com.nfs.project.model.customer;
 import com.nfs.project.repository.CustomerRepository;
-
+import com.nfs.project.dto.customerRequest;
 @Service("customerService")
 public class CustomerService implements CustomerServiceDAO {
 
@@ -29,17 +29,20 @@ public class CustomerService implements CustomerServiceDAO {
     }
 
     @Override
-    public void AddCustomer(customer customer) {
-        if(customer.getAddress()!="" && customer.getCity()!="" && customer.getFirstName()!=""
-            && customer.getPostalcode()!="" && customer.getLastName()!="" && customer.getPhoneNumber()!=""
-        ){
-            customer.setJoinDate(LocalDate.now());
-            Repository.save(customer);
-        }
-        else{
-            throw new IllegalStateException("Non Valid customer format");
-        }
+    public customer AddCustomer(customerRequest customerObj) {
+        var customerValue=customer.builder().Address(customerObj.getAddress()).FirstName(customerObj.getFirstname())
+                .LastName((customerObj.getLastname())).city(customerObj.getCity()).postalcode(customerObj.getPostalcode())
+                .JoinDate(LocalDate.now()).phoneNumber(customerObj.getPhoneNumber()).build();
+        return customerValue;
+    }
 
+    @Override
+    public List<customer> AddCustomersList(List<customerRequest> List) {
+        List<customer> ListCustomers=null;
+        for(customerRequest Req:List){
+            ListCustomers.add(AddCustomer(Req));
+        }
+        return ListCustomers;
     }
 
     @Transactional

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import com.nfs.project.dao.ProductServiceDAO;
 import com.nfs.project.model.Product;
 import com.nfs.project.repository.ProductRepository;
+import com.nfs.project.dto.productRequest;
 @Service
 public class ProductService implements ProductServiceDAO {
     private final ProductRepository repository;
@@ -28,15 +29,21 @@ public class ProductService implements ProductServiceDAO {
     }
 
     @Override
-    public void saveProduct(Product product) {
-        if(product.getDescription()!="" && product.getName()!="" && product.getPrice()!=0 && product.getType()!=""
-            && product.getImagesrc()!=""
-        ){
-            repository.save(product);
+    public Product saveProduct(productRequest product) {
+        var productObj=Product.builder().description(product.getDescription()).type(product.getType())
+                .imagesrc(product.getImagesrc()).name(product.getName()).price(product.getPrice())
+                .build();
+        repository.save(productObj);
+        return productObj;
+    }
+
+    @Override
+    public List<Product> SaveProductList(List<productRequest> ProductList) {
+        List<Product> ListProducts_objects=null;
+        for(productRequest req:ProductList){
+            ListProducts_objects.add(saveProduct(req));
         }
-        else{
-            throw new IllegalStateException("fields are required");
-        }
+        return ListProducts_objects;
     }
 
     @Override
