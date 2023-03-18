@@ -4,12 +4,11 @@ package com.nfs.project.service;
 import java.time.LocalDate;
 import java.util.List;
 
-import com.nfs.project.dto.orderOpRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.nfs.project.dao.OrderOpServiceDAO;
+import com.nfs.project.dto.orderOpRequest;
 import com.nfs.project.model.OrdersOperation;
 import com.nfs.project.repository.CustomerRepository;
 import com.nfs.project.repository.OrderOpRepository;
@@ -105,10 +104,13 @@ public class OrdersOpService implements OrderOpServiceDAO {
         }
         else{
             String Status="pending";
+            System.out.println("customer :"+ customerRepository.findById(order.getCustomerId()).get());
             var orderOpObj=OrdersOperation.builder().OrderDate(LocalDate.now()).TotalOrderPrice(order.getTotalOrderPrice())
-                    .Label(order.getLabel()).confirmed(false).Shipped(false).Received(false)
-                    .customerid(customerRepository.findById(order.getCustomerId()).get()).Status(Status).build();
+            .Label(order.getLabel()).ReceivingDate(LocalDate.now()).ShippingDate(LocalDate.now()).ConfirmationDate(LocalDate.now())
+            .customer(customerRepository.findById(order.getCustomerId()).get()).Status(Status).build();
+            System.out.println(orderOpObj);
             Repository.save(orderOpObj);
+            // System.exit(0);
             return orderOpObj;
         }
 
@@ -118,7 +120,7 @@ public class OrdersOpService implements OrderOpServiceDAO {
     public void setConfirmedOrderById(int OrderId) {
         if(Repository.findById(OrderId).isPresent()){
             OrdersOperation op=Repository.findById(OrderId).get();
-            op.setConfirmed(true);
+            // op.setConfirmed(true);
         }
         else{
             throw new IllegalStateException("non existed id");
@@ -129,7 +131,7 @@ public class OrdersOpService implements OrderOpServiceDAO {
     public void setShippedOrderById(int Orderid) {
         if(Repository.findById(Orderid).isPresent()){
             OrdersOperation op=Repository.findById(Orderid).get();
-            op.setShipped(true);
+            // op.setShipped(true);
         }
         else{
             throw new IllegalStateException("non existed value");
@@ -140,7 +142,7 @@ public class OrdersOpService implements OrderOpServiceDAO {
     public void SetReceivedOrderById(int Orderid) {
         if(Repository.findById(Orderid).isPresent()){
             OrdersOperation op=Repository.findById(Orderid).get();
-            op.setReceived(true);
+            // op.setReceived(true);
         }
         else{
             throw new IllegalStateException("non existed value");

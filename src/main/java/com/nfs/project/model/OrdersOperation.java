@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -33,21 +34,22 @@ public class OrdersOperation implements Serializable {
     private String Status;
     private float TotalOrderPrice;
     private LocalDate OrderDate,ConfirmationDate,ShippingDate,ReceivingDate;
-    private Boolean confirmed,Shipped,Received;
-    @ManyToOne
-    @JoinColumn(name="customer_id")
-    private customer customerid;
+    // private Boolean confirmed,Shipped,Received;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "customerid", referencedColumnName = "id", nullable = false)
+    private customer customer;
     
-    public OrdersOperation(customer customerid, String label,
+    public OrdersOperation(customer customer, String label,
             float totalOrderPrice, boolean confirmed) {
 
-        this.customerid = customerid;
+        this.customer = customer;
         this.Label = label;
         this.TotalOrderPrice = totalOrderPrice;
         this.OrderDate = LocalDate.now();
-        this.confirmed = confirmed;
-        this.Shipped = false;
-        this.Received = false;
+        // this.confirmed = confirmed;
+        // this.Shipped = false;
+        // this.Received = false;
         this.Status="pending";
 
 
