@@ -15,7 +15,7 @@ import HomePage from './components/Home/home';
 import BasicDocument from "./components/Orders/BasicDocument";
 import Mainsign from './components/SignIn/Mainsign';
 import PrivateRoutes from './components/PrivateRoutes';
-
+import DetailOrder from './components/Orders/detailOrder';
 function App() {
   return (
     <BrowserRouter>
@@ -25,13 +25,14 @@ function App() {
           {/* <Route path="/Dashboard" element={<Dashboard />} /> */}
           {/* <Route element={<Root />}> */}
           {/* <Route path="/Dashboard" element={<Dashboard />} /> */}
-      <Route element={<PrivateRoutes />}>
+      {/* <Route element={<PrivateRoutes />}> */}
 
           <Route path="/a/" element={<Root />}>
               <Route path="/a/Dashboard" element={<Dashboard />} />
 
               <Route path="/a/customers" element={<Customers />} />
               <Route path="/a/orders" element={<Orders />} />
+              <Route path='/a/orders/detail' element={<DetailOrder />} />
               {/* <Route path="/orders/bill" element={<BasicDocument />} /> */}
               <Route path="/a/products" element={<Products />} />
               <Route path="/a/products/add" element={<AddProducts />} />
@@ -40,7 +41,7 @@ function App() {
               <Route path="/a/stock" element={<StockOperations />} />
               <Route path="/a/stock/add" element={<AddStock />} />
           </Route>
-      </Route>
+      {/* </Route> */}
               <Route path="/login" element={<MainLogin />} />
               <Route path='/' element={<HomePage />} />
               <Route path="/SignIn" element={<Mainsign />} />

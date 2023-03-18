@@ -22,32 +22,32 @@ export default function Navbar () {
             </div>
 
             <div className="sidebar">
-                <NavLink to="/app/Dashboard">
+                <NavLink to="/a/Dashboard">
                     <span className="material-icons-sharp">grid_view</span>
                     <h3>Dashboard</h3>
                 </NavLink>
 
-                <NavLink to="/app/customers">
+                <NavLink to="/a/customers">
                     <span className="material-icons-sharp">person_outline</span>
                     <h3>Customers</h3>
                 </NavLink>
 
-                <NavLink to="/app/orders">
+                <NavLink to="/a/orders">
                     <span className="material-icons-sharp">receipt_long</span>
                     <h3>Orders</h3>
                 </NavLink>
 
-                <NavLink to="/app/stock">
+                <NavLink to="/a/stock">
                     <span className="material-icons-sharp">receipt_long</span>
                     <h3>Stock</h3>
                 </NavLink>
 
-                <NavLink to="/app/products">
+                <NavLink to="/a/products">
                     <span className="material-icons-sharp">inventory</span>
                     <h3>Products</h3>
                 </NavLink>
 
-                <NavLink to="/app/setting">
+                <NavLink to="/a/setting">
                     <span className="material-icons-sharp">settings</span>
                     <h3>Settings</h3>
                 </NavLink>

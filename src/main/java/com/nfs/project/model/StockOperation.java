@@ -44,7 +44,6 @@ public class StockOperation {
         this.productId = productId;
         this.quantity = quantity;
         this.Label = label;
-        this.EnteredDate=LocalDate.now();
         this.quantityConsumed=0;
     }
 }

@@ -43,8 +43,10 @@ public class StockOpService implements StockOpServiceDAO {
 
     @Override
     public StockOperation SaveStockOp(stockOpRequest StockOp) {
+
         var stockOp_obj=StockOperation.builder().Label(StockOp.getLabel()).productId(StockOp.getProductId())
                 .quantity(StockOp.getQuantity()).build();
+
         return stockOp_obj;
     }
 
