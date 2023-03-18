@@ -33,6 +33,7 @@ public class CustomerService implements CustomerServiceDAO {
         var customerValue=customer.builder().Address(customerObj.getAddress()).FirstName(customerObj.getFirstname())
                 .LastName((customerObj.getLastname())).city(customerObj.getCity()).postalcode(customerObj.getPostalcode())
                 .JoinDate(LocalDate.now()).phoneNumber(customerObj.getPhoneNumber()).build();
+        Repository.save(customerValue);
         return customerValue;
     }
 

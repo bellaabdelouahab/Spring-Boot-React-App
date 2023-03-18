@@ -97,9 +97,8 @@ public class OrdersOpService implements OrderOpServiceDAO {
     @Override
     public OrdersOperation SaveOrderOperation(orderOpRequest order) {
         String Status="pending";
-        if(order.isConfirmed()) Status="confirmed";
         var orderOpObj=OrdersOperation.builder().OrderDate(LocalDate.now()).TotalOrderPrice(order.getTotalOrderPrice())
-                .Label(order.getLabel()).confirmed(order.isConfirmed()).Shipped(false).Received(false)
+                .Label(order.getLabel()).confirmed(false).Shipped(false).Received(false)
                 .customerid(customerRepository.findById(order.getCustomerId()).get()).Status(Status).build();
         Repository.save(orderOpObj);
         return orderOpObj;

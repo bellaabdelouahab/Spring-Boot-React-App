@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.enterprise.inject.Default;
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -15,5 +17,4 @@ public class orderOpRequest {
     private String label;
     private float totalOrderPrice;
 
-    private boolean confirmed;
 }
