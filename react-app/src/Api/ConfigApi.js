@@ -1,7 +1,7 @@
 
 
 const getApiPath=()=>{
-    return "http://localhost:8082";
+    return "/";
 }
 
 const config={getApiPath}
