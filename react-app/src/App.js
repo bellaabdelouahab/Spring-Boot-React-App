@@ -33,7 +33,7 @@ function App() {
               <Route path="/a/customers" element={<Customers />} />
               <Route path="/a/orders" element={<Orders />} />
               <Route path='/a/orders/detail' element={<DetailOrder />} />
-              {/* <Route path="/orders/bill" element={<BasicDocument />} /> */}
+              <Route path="/orders/bill" element={<BasicDocument />} />
               <Route path="/a/products" element={<Products />} />
               <Route path="/a/products/add" element={<AddProducts />} />
               <Route path="/a/products/modifier/:id" element={<ModifierProducts />} />
