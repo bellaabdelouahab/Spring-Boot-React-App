@@ -20,7 +20,7 @@ public class OrdersOpService implements OrderOpServiceDAO {
     private ProductRepository productRepository;
     private CustomerRepository customerRepository;
 
-
+    @Autowired
     public OrdersOpService(OrderOpRepository repository,ProductRepository ProductRepository,
         CustomerRepository CustomerRepository
     ){
@@ -96,12 +96,18 @@ public class OrdersOpService implements OrderOpServiceDAO {
 
     @Override
     public OrdersOperation SaveOrderOperation(orderOpRequest order) {
-        String Status="pending";
-        var orderOpObj=OrdersOperation.builder().OrderDate(LocalDate.now()).TotalOrderPrice(order.getTotalOrderPrice())
-                .Label(order.getLabel()).confirmed(false).Shipped(false).Received(false)
-                .customerid(customerRepository.findById(order.getCustomerId()).get()).Status(Status).build();
-        Repository.save(orderOpObj);
-        return orderOpObj;
+        if(!customerRepository.findById(order.getCustomerId()).isPresent()){
+            throw new IllegalStateException("Customer not found");
+        }
+        else{
+            String Status="pending";
+            var orderOpObj=OrdersOperation.builder().OrderDate(LocalDate.now()).TotalOrderPrice(order.getTotalOrderPrice())
+                    .Label(order.getLabel()).confirmed(false).Shipped(false).Received(false)
+                    .customerid(customerRepository.findById(order.getCustomerId()).get()).Status(Status).build();
+            Repository.save(orderOpObj);
+            return orderOpObj;
+        }
+
     }
 
     @Override

@@ -30,7 +30,9 @@ public class OrderOpController {
 
     @PostMapping
     public OrdersOperation SaveOrder(@Valid @RequestBody orderOpRequest operation) {
+        System.out.println(operation.toString());
         return Service.SaveOrderOperation(operation);
+
     }
 
     @PostMapping(path = "/list")
