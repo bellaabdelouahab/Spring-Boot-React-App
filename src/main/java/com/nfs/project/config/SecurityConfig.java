@@ -11,7 +11,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
 
-import com.nfs.project.filters.*;
+import com.nfs.project.filters.JwtAuthenticationFilter;
 
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -44,14 +44,8 @@ public class SecurityConfig {
                         .logoutSuccessHandler((request, response, authentication) -> SecurityContextHolder.clearContext())
                 )
                 .exceptionHandling(exceptionHandling -> exceptionHandling
-                        // redirect to index.html
-                        // .authenticationEntryPoint((request, response, authException) -> {
-                        //     log.info("not allowed");
-                        //     response.getWriter().write(authException.getMessage());
-                        //     response.setStatus(444);
-                        // })
                         .accessDeniedHandler((request, response, accessDeniedException) -> {
-                            log.info("not allowed2");
+                            log.info("not allowed");
                   response.sendError(HttpServletResponse.SC_UNAUTHORIZED, accessDeniedException.getMessage());
               }))
                 .build();

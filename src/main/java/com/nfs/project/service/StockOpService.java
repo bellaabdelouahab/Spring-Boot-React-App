@@ -6,10 +6,10 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.nfs.project.dao.StockOpServiceDAO;
+import com.nfs.project.dto.stockOpRequest;
 import com.nfs.project.model.StockOperation;
 import com.nfs.project.repository.ProductRepository;
 import com.nfs.project.repository.StockOpRepository;
-import com.nfs.project.dto.stockOpRequest;
 
 @Service
 public class StockOpService implements StockOpServiceDAO {
@@ -45,6 +45,7 @@ public class StockOpService implements StockOpServiceDAO {
     public StockOperation SaveStockOp(stockOpRequest StockOp) {
         var stockOp_obj=StockOperation.builder().Label(StockOp.getLabel()).productId(StockOp.getProductId())
                 .quantity(StockOp.getQuantity()).build();
+        Repository.save(stockOp_obj);
         return stockOp_obj;
     }
 
@@ -62,6 +63,7 @@ public class StockOpService implements StockOpServiceDAO {
         if(Repository.findById(id).isPresent()){
             StockOperation op=Repository.findById(id).get();
             op.setQuantityConsumed(quantity);
+            Repository.save(op);
         }
         else{
             throw new IllegalStateException("non-existed Key");

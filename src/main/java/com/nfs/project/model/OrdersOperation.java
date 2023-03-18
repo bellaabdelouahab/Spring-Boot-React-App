@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -36,7 +35,7 @@ public class OrdersOperation implements Serializable {
     private LocalDate OrderDate,ConfirmationDate,ShippingDate,ReceivingDate;
     // private Boolean confirmed,Shipped,Received;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne()
     @JoinColumn(name = "customerid", referencedColumnName = "id", nullable = false)
     private customer customer;
     

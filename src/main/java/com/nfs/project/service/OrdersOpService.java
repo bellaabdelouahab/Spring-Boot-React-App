@@ -106,7 +106,7 @@ public class OrdersOpService implements OrderOpServiceDAO {
             String Status="pending";
             System.out.println("customer :"+ customerRepository.findById(order.getCustomerId()).get());
             var orderOpObj=OrdersOperation.builder().OrderDate(LocalDate.now()).TotalOrderPrice(order.getTotalOrderPrice())
-            .Label(order.getLabel()).ReceivingDate(LocalDate.now()).ShippingDate(LocalDate.now()).ConfirmationDate(LocalDate.now())
+            .Label(order.getLabel()) //.ReceivingDate(LocalDate.now()).ShippingDate(LocalDate.now()).ConfirmationDate(LocalDate.now())
             .customer(customerRepository.findById(order.getCustomerId()).get()).Status(Status).build();
             System.out.println(orderOpObj);
             Repository.save(orderOpObj);

@@ -4,6 +4,7 @@ package com.nfs.project.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,11 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.nfs.project.dto.orderOpRequest;
 import com.nfs.project.model.OrdersOperation;
 import com.nfs.project.service.OrdersOpService;
 
 import jakarta.validation.Valid;
-import com.nfs.project.dto.orderOpRequest;
 
 @RestController
 @CrossOrigin(origins = { "http://localhost:3000", "http://codemaster.ninja" }, allowCredentials = "true")
@@ -29,9 +30,9 @@ public class OrderOpController {
     
 
     @PostMapping
-    public OrdersOperation SaveOrder(@Valid @RequestBody orderOpRequest operation) {
+    public ResponseEntity<OrdersOperation> SaveOrder(@Valid @RequestBody orderOpRequest operation) {
         System.out.println(operation.toString());
-        return Service.SaveOrderOperation(operation);
+        return ResponseEntity.created(null).body(Service.SaveOrderOperation(operation));
 
     }
 

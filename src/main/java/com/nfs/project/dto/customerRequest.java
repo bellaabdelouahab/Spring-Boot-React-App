@@ -1,6 +1,5 @@
 package com.nfs.project.dto;
 
-import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,9 +11,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class customerRequest {
    
-    private String firstname;
+    private String firstName;
 
-    private String lastname;
+    private String lastName;
     private String Address;
 
     private String city;
