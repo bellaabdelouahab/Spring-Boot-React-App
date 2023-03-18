@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.nfs.project.dto.orderOpRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.nfs.project.dao.OrderOpServiceDAO;
@@ -16,18 +17,21 @@ import com.nfs.project.repository.ProductRepository;
 
 @Service
 public class OrdersOpService implements OrderOpServiceDAO {
+    @Autowired
     private OrderOpRepository Repository;
+    @Autowired
     private ProductRepository productRepository;
+    @Autowired
     private CustomerRepository customerRepository;
 
-    @Autowired
-    public OrdersOpService(OrderOpRepository repository,ProductRepository ProductRepository,
+
+    /*public OrdersOpService(OrderOpRepository repository,ProductRepository ProductRepository,
         CustomerRepository CustomerRepository
     ){
         Repository=repository;
         productRepository=ProductRepository;
         customerRepository=CustomerRepository;
-    }
+    }*/
     @Override
     public List<OrdersOperation> getAllOrders() {
         return Repository.findAll();
