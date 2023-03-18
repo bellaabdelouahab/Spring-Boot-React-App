@@ -110,6 +110,9 @@ export default function HomePage() {
                     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/TT_Electronics_logo.svg/2560px-TT_Electronics_logo.svg.png" alt="logo" width={'400px'} />
                 </section>
                 <ProductSection data={Products.slice(0,14)} addToCart={addtoCart}/>
+                <div className="footer-homepage-panel">
+                    Developed By <b>Yassine Boujrada</b>, <b>Youssef Mahdi</b>, <b>Abdelouahab Bella</b>
+                </div>
             </main>
             <Cart display={OpenBasketWindow} items={InCartProducts} onChangeQuantity={ModifyQuantity} onClose={onCloseBasket} onRemove={removeFromCart} openCheckout={OpenCheckout}/>
             <Checkout display={OpenCheckoutWindow} items={InCartProducts} onChangeQuantity={ModifyQuantity} onClose={closeCheckoutWindow} onRemove={removeFromCart} />

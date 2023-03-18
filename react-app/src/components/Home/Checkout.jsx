@@ -51,6 +51,7 @@ export default function Checkout({display,onClose,items,onChangeQuantity,onRemov
                     <input type="text" placeholder="ex:amrani" id="lastnameinput" /><br/>
                     <label>Address</label><br/>
                     <input type="text" placeholder="ex:Rue arrahma casablanca" id="addressinput" /><br/>
+                    <label>City</label><br/>
                     <select>
                         <option>Marrakech</option>
                         <option>Rabat</option>
@@ -60,6 +61,7 @@ export default function Checkout({display,onClose,items,onChangeQuantity,onRemov
                     </select><br/>
                     <label>Phone Number</label><br/>
                     <input type="tel" id="phonenumberinput" placeholder="ex:0611112211" /><br/>
+                    
                     <button className="btn-send-checkout">
                         <span class="material-icons-sharp" style={{"color":"var(--color-background)"}}>
                             shopping_cart_checkout

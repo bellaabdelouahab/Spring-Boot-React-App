@@ -265,3 +265,14 @@
     background-color: #7380ec;
     color: #f6f6f9;
 }
+.form-checkout label{
+    padding-top: 10px;
+    
+}
+.footer-homepage-panel{
+    padding: 40px;
+    color: #f6f6f9;
+}
+.footer-homepage-panel b{
+    color: #f6f6f9;
+}
