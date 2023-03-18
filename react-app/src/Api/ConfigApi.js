@@ -1,7 +1,7 @@
 
 
 const getApiPath=()=>{
-    return "/";
+    return "";
 }
 
 const config={getApiPath}
