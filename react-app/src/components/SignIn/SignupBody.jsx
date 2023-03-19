@@ -6,7 +6,6 @@ import axios from "axios"
 import config from "../../Api/ConfigApi";
 
 export default function SignupBody() {
-    
     const toastOptions = {
         position: "top-right",
         autoClose: 8000,  
