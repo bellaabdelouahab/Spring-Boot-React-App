@@ -6,6 +6,9 @@ import productsApi from "../../Api/ProductApi";
 import Cart from "./cart";
 import Checkout from "./Checkout";
 import DetailProduct from "./detailProduct";
+import costumers from "../../Api/customersApi";
+import OrdersApi from "../../Api/OrdersApi";
+import OrderBasketApi from "../../Api/OrderBasketApi";
 export default function HomePage() {
     const [Products, setProducts] = useState([]);
     const [load,setLoad]=useState(false);
@@ -91,6 +94,26 @@ export default function HomePage() {
     const openBasket=()=>{setOpenBasketWindow(true);}
     const closeCheckoutWindow=()=>{setOpenCheckoutWindow(false)}
     const OpenCheckout=()=>{setOpenCheckoutWindow(true)}
+    const getTotalBasketprice=()=>{
+        let total=0;
+        InCartProducts.map((product)=>{
+            total+=product.price;
+        })
+        return total;
+    }
+    const onSubmitOrder=async(firstname,lastname,address,city,phonenumber)=>{
+        await costumers.AddCustomer(firstname,lastname,address,city,"",phonenumber).then(async(data)=>{
+            await OrdersApi.AddOrder(data.id,"--",getTotalBasketprice()).then((resOrder)=>{
+                InCartProducts.map((product)=>{
+                    OrderBasketApi.AddBasket(data.id,resOrder.id,product.price,product.quantity).then((data)=>{
+
+                    }).catch((e)=>{
+                        console.log(e)
+                    })
+                })
+            })
+        })
+    }
     if(!load){
         return(<span>Loading ....</span>)
     }
@@ -115,7 +138,7 @@ export default function HomePage() {
                 </div>
             </main>
             <Cart display={OpenBasketWindow} items={InCartProducts} onChangeQuantity={ModifyQuantity} onClose={onCloseBasket} onRemove={removeFromCart} openCheckout={OpenCheckout}/>
-            <Checkout display={OpenCheckoutWindow} items={InCartProducts} onChangeQuantity={ModifyQuantity} onClose={closeCheckoutWindow} onRemove={removeFromCart} />
+            <Checkout display={OpenCheckoutWindow} items={InCartProducts} onChangeQuantity={ModifyQuantity} onClose={closeCheckoutWindow} onRemove={removeFromCart} onSubmit={onSubmitOrder} />
         </>
     )
 }

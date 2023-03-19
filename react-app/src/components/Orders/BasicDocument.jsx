@@ -9,7 +9,9 @@ import {
  } from "@react-pdf/renderer";
 import logo from '../../assets/images/logo.png'
 import { useLocation } from "react-router-dom";
-
+import OrderBasketApi from "../../Api/OrderBasketApi";
+import { useState } from "react";
+import { useEffect } from "react";
 const borderColor = '#90e5fc'
   
 
@@ -106,6 +108,7 @@ const styles = StyleSheet.create({
         width: '60%',
         borderRightColor: borderColor,
         borderRightWidth: 1,
+        textAlign:'center'
     },
     qty: {
         width: '10%',
@@ -130,18 +133,42 @@ const styles = StyleSheet.create({
         fontStyle: 'bold',
     },
     total: {
-        width: '15%',
+        width: '50%',
         textAlign: 'right',
         paddingRight: 8,
+        textAlign:'center'
     },
+    signature:{
+        marginTop:20,
+        marginBottom:50
+    },
+    dateLocal:{
+        marginTop:20
+    }
   });
   
   
 function BasicDocument() {
-
+    const [Loaddata, setLoaddata] = useState(false)
+    let LocalDate=new Date();
+    const [BasketElements, setBasketElements] = useState([])
+    const getDataStockApi=async(id)=>{
+        await OrderBasketApi.getOrderBasketByOrderNumber(id).then((data)=>{
+            setBasketElements(data)
+            setLoaddata(true)
+        }).catch((e)=>{
+            console.log(e)
+        })
+    }
     var location = useLocation();
     var order = location.state;
 
+    useEffect(()=>{
+        getDataStockApi(order.id);
+    },[Loaddata])
+    if(!Loaddata){
+        return <div>Loading ..</div>
+    }
     return (
         <div style={styles.pdfviewer}>
       <PDFViewer style={styles.viewer}>
@@ -149,7 +176,7 @@ function BasicDocument() {
           <Page size="A4" style={styles.page}>
             <Image style={styles.logo} src={logo} />
             <View style={styles.titleContainer}>
-                <Text style={styles.reportTitle}>Stock Management Bill No : {order.id}</Text>
+                <Text style={styles.reportTitle}>Electronic S.A</Text>
             </View>
 
             <View style={styles.invoiceNoContainer}>
@@ -158,28 +185,55 @@ function BasicDocument() {
             </View >
 
             <View style={styles.invoiceDateContainer}>
-                <Text style={styles.label}>Date: </Text>
+                <Text style={styles.label}>Order Date: </Text>
                 <Text >{order.orderDate}</Text>
             </View >
             <View style={styles.headerContainer}>
-                <Text style={styles.billTo}>Bill To:</Text>
-                <Text>Customer ID : {order.customerid}</Text>
-                <Text>Product No : {order.productId}</Text>
+                <Text style={styles.billTo}>Bill To: {order.customer.firstName+" "+order.customer.lastName}</Text>
+                <Text>Customer ID : {order.customer.id}</Text>
+                
             </View>
             <View style={styles.tableContainer}>
                 <View style={styles.container}>
-                    <Text style={styles.description}>Price Per Unit</Text>
+                    <Text style={styles.description}>Nº</Text>
+                    <Text style={styles.description}>Name</Text>
+                    <Text style={styles.description}>Price per unit</Text>
                     <Text style={styles.description}>Quantity</Text>
+                    <Text style={styles.description}>Total Price</Text>
+                    
                 </View>
-                <View style={styles.row} key={order.id}>
+                {
+                    BasketElements?.map((basket)=>{
+                        return(
+                            <View style={styles.row} key={basket.basketid}>
+                                <Text style={styles.description}>{basket.product.id}</Text>
+                                <Text style={styles.description}>{basket.product.name}</Text>
+                                <Text style={styles.description}>{basket.priceperunit} MAD</Text>
+                                <Text style={styles.description}>{basket.quantity}</Text>
+                                <Text style={styles.description}>{basket.quantity*basket.priceperunit} MAD</Text>
+                            </View>
+                        )
+                    })
+                }
+                {/* <View style={styles.row} key={order.id}>
                     <Text style={styles.description}>{order.priceperunit} DH</Text>
                     <Text style={styles.description}>{order.quantity}</Text>
-                </View>
+                    <Text style={styles.description}></Text>
+                </View> */}
                 <View style={styles.row}>
                     <Text style={styles.description}>TOTAL</Text>
-                    <Text style={styles.total}>{order.totalOrderPrice} DH</Text>
+                    <Text style={styles.total}>{order.totalOrderPrice} MAD</Text>
                 </View>
+                
             </View>
+            <View style={styles.signature}>
+                <Text style={{fontWeight:'bold'}}>Signature</Text>
+            </View>
+            <View style={styles.dateLocal}>
+                <Text>{LocalDate.toDateString()}</Text>
+                <Text>Essaouira,Morocco</Text>
+            </View>
+
           </Page>
         </Document>
       </PDFViewer>

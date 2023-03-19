@@ -1,7 +1,12 @@
 import React from "react";
+import { useState } from "react";
 
-
-export default function Checkout({display,onClose,items,onChangeQuantity,onRemove}) {
+export default function Checkout({display,onClose,items,onChangeQuantity,onRemove,onSubmit}) {
+    const [FirstName, setFirstName] = useState("");
+    const [LastName, setLastName] = useState("");
+    const [Address, setAddress] = useState("");
+    const [city, setCity] = useState("marrakech");
+    const [phoneNumber, setPhoneNumber] = useState("");
     if(!display){
         return(<></>)
     }
@@ -46,23 +51,23 @@ export default function Checkout({display,onClose,items,onChangeQuantity,onRemov
                 </section>
                 <section className="form-checkout" >
                     <label>First Name</label><br/>
-                    <input type="text" placeholder="ex:ahmed" id="firstnameinput" /><br/>
+                    <input type="text" value={FirstName} onChange={(text)=>setFirstName(text.target.value)} placeholder="ex:ahmed" id="firstnameinput" /><br/>
                     <label>Last Name</label><br/>
-                    <input type="text" placeholder="ex:amrani" id="lastnameinput" /><br/>
+                    <input type="text" value={LastName} onChange={(text)=>setLastName(text.target.value)} placeholder="ex:amrani" id="lastnameinput" /><br/>
                     <label>Address</label><br/>
-                    <input type="text" placeholder="ex:Rue arrahma casablanca" id="addressinput" /><br/>
+                    <input type="text" value={Address} onChange={(text)=>setAddress(text.target.value)} placeholder="ex:Rue arrahma casablanca" id="addressinput" /><br/>
                     <label>City</label><br/>
-                    <select>
-                        <option>Marrakech</option>
-                        <option>Rabat</option>
-                        <option>Agadir</option>
-                        <option>casablanca</option>
-                        <option>Tanger</option>
+                    <select onChange={(text)=>setCity(text.target.value)}>
+                        <option value={"marrakech"}>Marrakech</option>
+                        <option value={"rabat"}>Rabat</option>
+                        <option value={"agadir"}>Agadir</option>
+                        <option value={"casablanca"}>casablanca</option>
+                        <option value={"tangier"}>Tangier</option>
                     </select><br/>
                     <label>Phone Number</label><br/>
-                    <input type="tel" id="phonenumberinput" placeholder="ex:0611112211" /><br/>
+                    <input type="tel" value={phoneNumber} onChange={(text)=>setPhoneNumber(text.target.value)} id="phonenumberinput" placeholder="ex:0611112211" /><br/>
                     
-                    <button className="btn-send-checkout">
+                    <button className="btn-send-checkout" onClick={()=>onSubmit(FirstName,LastName,Address,city,phoneNumber)}>
                         <span class="material-icons-sharp" style={{"color":"var(--color-background)"}}>
                             shopping_cart_checkout
                         </span>

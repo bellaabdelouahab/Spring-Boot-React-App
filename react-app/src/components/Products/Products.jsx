@@ -64,7 +64,7 @@ export default function Products () {
     <div className='top'>
       <div className="add-product" style={{"justifyContent":"space-evenly","display":"flex","width":350}}>
         <button id='btn-add' onClick={() => {
-                window.open("/products/add", "_blank");
+                window.open("/a/products/add", "_blank");
             }}>
             <span className="material-icons-sharp">
                 add
@@ -86,7 +86,7 @@ export default function Products () {
                       <th>price</th>
                       <th>type</th>
                       <th>Description</th>
-                      <th>Action</th>
+                      {/* <th>Action</th> */}
                     </tr>
                 </thead>
                 <tbody className='scrool-tbody-proudcts'>
@@ -94,7 +94,7 @@ export default function Products () {
                         <tr key={product.id}>
                             <td>{product.id}</td>
                             <td>{product.name}</td>
-                            <td>{product.price} DH</td>
+                            <td>{product.price}</td>
                             <td>{product.type}</td>
                             <td>{product.description}</td>
                             <td >
@@ -105,9 +105,9 @@ export default function Products () {
                                     add
                                   </span> */}
                                 
-                                <span class="material-icons-sharp" style={{"color":"var(--color-danger)"}}  onClick={()=>delete_this(product.id)}>
+                                {/* <span class="material-icons-sharp" style={{"color":"var(--color-danger)"}}  onClick={()=>delete_this(product.id)}>
                                   delete
-                                </span>
+                                </span> */}
                               </div>
                             </td>
                         </tr>

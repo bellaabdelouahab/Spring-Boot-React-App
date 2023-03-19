@@ -9,14 +9,24 @@ export default function StockOperations() {
 
   const headers = [
       { label: "Nº", key: "id" },
-      { label: "Entred date", key: "enteredDate" },
-      { label: "Exited date", key: "exitedDate" },
       { label: "Label", key: "label" },
       { label: "Nº Product", key: "productId" },
       { label: "Quantity", key: "quantity" },
       { label: "Quantity Consumed", key: "quantityConsumed" }
     ];
-
+  const getDataStocks=(stocks)=>{
+    let array=[]
+    stocks?.map((st)=>{
+      array.push({
+        id:st.id,
+        label:st.label,
+        productId:st.productId,
+        quantity:st.quantity,
+        quantityConsumed:st.quantityConsumed
+      })
+    })
+    return array;
+  }
   useEffect(() => {
       StockOp.getStockData.then((data)=>{
         setStocks(data);
@@ -24,15 +34,9 @@ export default function StockOperations() {
   }, [block_effetc]);
   
   
-  const exitedDate=(order)=>{
-    if(order.exitedDate==null){
-      return "-";
-    }
-    return order.exitedDate;
-  }
 
   const csvReport = {
-      data: stocks,
+      data: getDataStocks(stocks),
       headers: headers,
       filename: 'Stockes.csv'
     };
@@ -62,7 +66,7 @@ export default function StockOperations() {
             <div className='top'>
               <div className="add-product" style={{"justifyContent":"space-evenly","display":"flex","width":350}}>
                 <button id='btn-add' onClick={() => {
-                        window.open("/stock/add", "_blank");
+                        window.open("/a/stock/add", "_blank");
                     }}>
                     <span className="material-icons-sharp">
                         add
@@ -79,8 +83,6 @@ export default function StockOperations() {
                 <thead>
                     <tr>
                       <th>Nº</th>
-                      <th>Entred date</th>
-                      <th>Exited date</th>
                       <th>Label</th>
                       <th>Nº Product</th>
                       <th>Quantity</th>
@@ -92,8 +94,6 @@ export default function StockOperations() {
                     {stocks.map((stock) => (
                         <tr key={stock.id}>
                             <td>{stock.id}</td>
-                            <td>{stock.enteredDate}</td>
-                            <td>{exitedDate(stock)}</td>
                             <td>{stock.label}</td>
                             <td>{stock.productId}</td>
                             <td>{stock.quantity}</td>

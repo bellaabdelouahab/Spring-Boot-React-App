@@ -23,7 +23,19 @@ const statusOrder=(order)=>{
   }
   return "pending"
 }
-
-const OrdersApi={getDataOrders,statusOrder}
+const AddOrder=(customerId,label,totalOrderPrice)=>{
+  return new Promise((resolve,reject)=>{
+      axios.post(`${config.getApiPath()}/api/v1/app/orders`,{
+        "customerId":customerId,
+        "label":label,
+        "totalOrderPrice":totalOrderPrice
+      }).then((res)=>{
+        resolve(res.data);
+      }).catch((e)=>{
+        reject(e);
+      })
+  })
+}
+const OrdersApi={getDataOrders,statusOrder,AddOrder}
 
 export default OrdersApi;
