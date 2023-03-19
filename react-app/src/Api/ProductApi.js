@@ -21,7 +21,7 @@ const deleteProductById=(id)=>{
 }
 const addProduct=(productName,desc,type,ImageSrc)=>{
     return new Promise((resolve,reject)=>{
-        axios.post('http://localhost:8081/api/v1/app/product',{"price": 3,
+        axios.post(`${config.getApiPath()}/api/v1/app/product`,{"price": 3,
         "name":productName,
         "description":desc,
         "type":type,

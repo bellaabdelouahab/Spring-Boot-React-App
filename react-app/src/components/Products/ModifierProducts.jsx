@@ -1,6 +1,7 @@
 import React from 'react'
 import profile_photo from '../../assets/images/profile-1.jpg';
 import { useNavigate,useLocation } from "react-router-dom";
+import config from "../../Api/ConfigApi";
 
 export default function ModifierProducts () {
     const navigate = useNavigate();
@@ -14,7 +15,7 @@ export default function ModifierProducts () {
     const onSubmitForm = async (e,id) => {
         e.preventDefault();
 
-        fetch(`http://localhost:8081/api/v1/app/product/${id}`, {
+        fetch(`${config.getApiPath()}/api/v1/app/product/${id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json" , 

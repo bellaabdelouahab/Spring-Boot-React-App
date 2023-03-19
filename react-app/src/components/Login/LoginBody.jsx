@@ -4,6 +4,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 // import AuthApi from "../../Api/AuthApi";
+import config from "../../Api/ConfigApi";
 
 export default function LoginBody() {
     
@@ -46,7 +47,7 @@ export default function LoginBody() {
             const { username, password } = values;
             console.log(values);
             const  data  = await axios.post(
-              "http://localhost:8081/api/v1/auth/authenticate",
+              `${config.getApiPath()}/api/v1/auth/authenticate`,
               {
                 email: username,
                 password:password,
