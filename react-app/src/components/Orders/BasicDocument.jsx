@@ -134,7 +134,6 @@ const styles = StyleSheet.create({
     },
     total: {
         width: '50%',
-        textAlign: 'right',
         paddingRight: 8,
         textAlign:'center'
     },
