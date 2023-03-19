@@ -31,6 +31,7 @@ public class CustomerController {
 
     @PostMapping
     public customer saveCustomer(@RequestBody customerRequest customer){
+        System.out.println(customer);
         return Service.AddCustomer(customer);
     }
     @PostMapping(path = "/list")

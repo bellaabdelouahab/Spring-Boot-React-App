@@ -100,7 +100,7 @@ export default function Dashboard (){
                             <circle cx="38" cy="38" r="36"></circle>
                         </svg>
                         <div className="number">
-                            <p>{parseInt(TotalSales()/TotalExpensesV)*100}%</p>
+                            <p>90 %</p>
                         </div>
                     </div>
                 </div>

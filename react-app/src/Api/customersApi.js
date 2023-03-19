@@ -30,4 +30,5 @@ const costumers={
     getCustomers,AddCustomer
 }
 
+
 export default costumers;

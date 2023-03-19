@@ -127,7 +127,7 @@ export default function Orders() {
                                 {/* <span class="material-icons-sharp" style={{"color":"var(--color-danger)"}}>
                                   edit
                                 </span> */}
-                                <span onClick={()=>Navigate("/a/orders/bill",{state:order})} class="material-icons-sharp" style={{"color":"var(--color-dark  )"}}>
+                                <span onClick={()=>Navigate("/admin/orders/bill",{state:order})} class="material-icons-sharp" style={{"color":"var(--color-dark  )"}}>
                                   article
                                 </span>
                               </div>

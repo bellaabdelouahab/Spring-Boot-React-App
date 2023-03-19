@@ -2,8 +2,8 @@ import { useNavigate, Link } from "react-router-dom";
 import React,{useState} from 'react';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-// import axios from "axios";
-import AuthApi from "../../Api/AuthApi";
+import axios from "axios";
+// import AuthApi from "../../Api/AuthApi";
 
 export default function LoginBody() {
     
@@ -41,29 +41,29 @@ export default function LoginBody() {
             "Auth",
             JSON.stringify(document.cookie)
           );
-          navigate("/a/Dashboard");
+          // navigate("/admin/Dashboard");
           try {
             const { username, password } = values;
             console.log(values);
-            // const  data  = await axios.post(
-            //   "http://localhost:8081/api/v1/auth/authenticate",
-            //   {
-            //     email: username,
-            //     password:password,
-            //   }
-            // );
-            const data=AuthApi.AuthHandler(username,password);
+            const  data  = await axios.post(
+              "http://localhost:8081/api/v1/auth/authenticate",
+              {
+                email: username,
+                password:password,
+              }
+            );
+            // const data=AuthApi.AuthHandler(username,password);
             
-            // if (data.status === 200) {
-            //   localStorage.setItem(
-            //     "Auth",
-            //     JSON.stringify(document.cookie)
-            //   );
-            //   navigate("/");
-            // }
-            // else{
-            //   toast.error("There is an error plz check you're information", toastOptions);
-            // }
+            if (data.status === 200) {
+              localStorage.setItem(
+                "Auth",
+                JSON.stringify(document.cookie)
+              );
+              navigate("/admin/Dashboard");
+            }
+            else{
+              toast.error("There is an error plz check you're information", toastOptions);
+            }
             }catch (error) {
               toast.error("Something going wrong", toastOptions);
           }

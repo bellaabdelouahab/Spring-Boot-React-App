@@ -20,10 +20,10 @@ const getAllOrderBasketData=()=>{
         })
     });
 }
-const AddBasket=(customerId,productId,priceperunit,quantity)=>{
+const AddBasket=(orderId,productId,priceperunit,quantity)=>{
     return new Promise((resolve,reject)=>{
         axios.post(`${config.getApiPath()}/api/v1/app/orderBasket`,{
-            "orderId":customerId,
+            "orderId":orderId,
             "productId":productId,
             "priceperunit":priceperunit,
             "quantity":quantity

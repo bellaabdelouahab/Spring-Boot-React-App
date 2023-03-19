@@ -64,7 +64,7 @@ export default function Products () {
     <div className='top'>
       <div className="add-product" style={{"justifyContent":"space-evenly","display":"flex","width":350}}>
         <button id='btn-add' onClick={() => {
-                window.open("/a/products/add", "_blank");
+                window.open("/admin/products/add", "_blank");
             }}>
             <span className="material-icons-sharp">
                 add

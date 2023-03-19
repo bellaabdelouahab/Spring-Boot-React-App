@@ -102,12 +102,13 @@ export default function HomePage() {
         return total;
     }
     const onSubmitOrder=async(firstname,lastname,address,city,phonenumber)=>{
-        await costumers.AddCustomer(firstname,lastname,address,city,"",phonenumber).then(async(data)=>{
+        await costumers.AddCustomer(firstname,lastname,address,city,"83000",phonenumber).then(async(data)=>{
             await OrdersApi.AddOrder(data.id,"--",getTotalBasketprice()).then((resOrder)=>{
                 InCartProducts.map((product)=>{
-                    OrderBasketApi.AddBasket(data.id,resOrder.id,product.price,product.quantity).then((data)=>{
+                    OrderBasketApi.AddBasket(resOrder.id,product.id,product.price,product.quantity).then((data)=>{
 
                     }).catch((e)=>{
+                       
                         console.log(e)
                     })
                 })

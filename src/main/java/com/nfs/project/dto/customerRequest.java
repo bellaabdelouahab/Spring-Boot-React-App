@@ -14,7 +14,7 @@ public class customerRequest {
     private String firstName;
 
     private String lastName;
-    private String Address;
+    private String address;
 
     private String city;
 
