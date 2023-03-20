@@ -7,6 +7,17 @@ export default function Checkout({display,onClose,items,onChangeQuantity,onRemov
     const [Address, setAddress] = useState("");
     const [city, setCity] = useState("marrakech");
     const [phoneNumber, setPhoneNumber] = useState("");
+    const [OrderCheckoutClicked, setOrderCheckoutClicked] = useState(false)
+    const ShowSendMessage=()=>{
+        if(OrderCheckoutClicked){
+            return <div style={{textAlign:'center',fontFamily:'Poppins'}}>
+                Your Order is sent
+            </div>
+        }
+        else{
+            return <></>
+        }
+    }
     if(!display){
         return(<></>)
     }
@@ -67,13 +78,16 @@ export default function Checkout({display,onClose,items,onChangeQuantity,onRemov
                     <label>Phone Number</label><br/>
                     <input type="tel" value={phoneNumber} onChange={(text)=>setPhoneNumber(text.target.value)} id="phonenumberinput" placeholder="ex:0611112211" /><br/>
                     
-                    <button className="btn-send-checkout" onClick={()=>onSubmit(FirstName,LastName,Address,city,phoneNumber)}>
+                    <button className="btn-send-checkout" onClick={()=>{
+                        onSubmit(FirstName,LastName,Address,city,phoneNumber)
+                        setOrderCheckoutClicked(true)
+                        }}>
                         <span class="material-icons-sharp" style={{"color":"var(--color-background)"}}>
                             shopping_cart_checkout
                         </span>
                         <div>check-out</div>
                     </button>
-                    
+                    {ShowSendMessage()}
                 </section>
             </div>
         </div>
